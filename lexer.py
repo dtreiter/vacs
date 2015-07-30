@@ -1,10 +1,13 @@
 import re
 
+SPECIALS = ["esc", "tab"]
+MODIFIERS = ["ctrl", "shift"]
+
 def lex(grammar):
     """
     Turns a grammar dictionary into a list of entries each containing
     a key and tokens. Each token consists of a list of modifiers and a
-    letter.
+    symbol.
     """
     tokenized_grammar = []
     for entry in grammar:
@@ -20,18 +23,18 @@ def lex(grammar):
 
 
 def split_characters(string):
-    """Splits the string into a list of individual letters and modifiers."""
-    return split_letters(split_modifiers(string))
+    """Splits the string into a list of individual symbols and tags."""
+    return split_letters(split_tags(string))
 
 
 def split_letters(strings):
     """
-    Given a list of modifiers and strings, return a list of modifiers
-    and individual letters.
+    Given a list of tags and strings, return a list of tags
+    and individual symbols.
     """
     characters = []
     for string in strings:
-        if is_modifier(string):
+        if is_tag(string):
             characters.append(string)
         else:
             characters.extend(list(string))
@@ -39,32 +42,41 @@ def split_letters(strings):
     return characters
 
 
-def split_modifiers(string):
-    """Splits the string into a list of modifiers and strings."""
+def split_tags(string):
+    """Splits the string into a list of tags and strings."""
     return re.split("(<[^>]+>)", string)
 
 
 def tokenize(characters):
     """
     Turns a list of characters into a list of dictionaries each containing
-    the letter and any modifiers which should be pressed with that letter.
+    the symbols and any modifiers which should be pressed with that symbols.
     """
     tokens = []
     iter_characters = iter(characters)
     for character in iter_characters:
         token = {"modifiers": []}
         while is_modifier(character):
-            modifier = get_modifier(character)
+            modifier = get_tag(character)
             token["modifiers"].append(modifier)
             character = next(iter_characters)
-        token["letter"] = character
+
+        if is_special(character):
+            special = get_tag(character)
+            token["symbol"] = special
+        elif len(character) == 1:
+            token["symbol"] = character
+        else:
+            print("ERROR: Unrecognized tag in grammar.")
+            return
+
         tokens.append(token)
 
     return tokens
 
 
-def is_modifier(character):
-    """Determine if the character is a modifier."""
+def is_tag(character):
+    """Determine if the character is a tag."""
     match = re.match("<[^>]+>", character)
     if match:
         return True
@@ -72,7 +84,25 @@ def is_modifier(character):
     return False
 
 
-def get_modifier(character):
-    """Return the modifier contained within the tag."""
+def get_tag(character):
+    """Return the contents of the tag."""
     match = re.match("<([^>]+)>", character)
     return match.group(1)
+
+
+def is_modifier(string):
+    """Determine if the string is a modifier."""
+    if is_tag(string):
+        if get_tag(string) in MODIFIERS:
+            return True
+
+    return False
+
+
+def is_special(string):
+    """Determine if the string is a special character."""
+    if is_tag(string):
+        if get_tag(string) in SPECIALS:
+            return True
+
+    return False
