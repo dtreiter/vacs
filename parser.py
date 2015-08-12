@@ -29,6 +29,9 @@ def parse_token(token):
     Given a symbol and a list of modifiers, return a string representing
     the parsed token.
     """
+    if token["symbol"] == " ":
+        token["symbol"] = "Space"
+
     if "ctrl" in token["modifiers"]:
         return "C-" + token["symbol"]
     else:
