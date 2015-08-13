@@ -47,11 +47,14 @@ def read_input():
     tty.setraw(fileno)
     while 1:
         data = os.read(0, 1024).lower()
-        if data in MODE_GRAMMAR:
-            os.system("tmux send-keys " + MODE_GRAMMAR[data])
-            print(data + " -> " + MODE_GRAMMAR[data])
-        else:
-            print("Unrecognized rule: " + data)
+        words = data.split(" ")
+        for word in words:
+            if word in MODE_GRAMMAR:
+                os.system("tmux send-keys " + MODE_GRAMMAR[word])
+                print(word + " -> " + MODE_GRAMMAR[word])
+            else:
+                print("Unrecognized rule: " + word)
+                break
 
 def interpret():
     grammars = load_grammars()
