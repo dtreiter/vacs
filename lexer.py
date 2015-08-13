@@ -1,6 +1,14 @@
 import re
 
-SPECIALS = ["esc", "tab", "enter"]
+SPECIALS = [
+    "esc",
+    "tab",
+    "enter",
+    "up",
+    "down",
+    "left",
+    "right"
+]
 MODIFIERS = ["ctrl", "shift"]
 
 def lex(grammar):

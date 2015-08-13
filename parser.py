@@ -2,12 +2,14 @@
 
 SPECIAL_CHARACTERS = {
     "esc": "Escape",
-    " ": "Space",
-    "space": "Space",
-    "backslash": "\\",
+    "enter": "Enter",
     "tab": "Tab",
-    "*": "\\\\*",
-    "enter": "Enter"
+    "up": "Up",
+    "down": "Down",
+    "left": "Left",
+    "right": "Right",
+    " ": "Space",
+    "*": "\\\\*"
 }
 
 def parse(tokenized_grammar):
