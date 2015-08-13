@@ -1,6 +1,6 @@
 import re
 
-SPECIALS = ["esc", "tab"]
+SPECIALS = ["esc", "tab", "enter"]
 MODIFIERS = ["ctrl", "shift"]
 
 def lex(grammar):
@@ -67,7 +67,7 @@ def tokenize(characters):
         elif len(character) == 1:
             token["symbol"] = character
         else:
-            print("ERROR: Unrecognized tag in grammar.")
+            print("ERROR: Unrecognized tag '" + character + "' in grammar.")
             return
 
         tokens.append(token)

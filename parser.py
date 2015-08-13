@@ -1,5 +1,15 @@
 # TODO This parser is specifically for the tmux set up.
 
+SPECIAL_CHARACTERS = {
+    "esc": "Escape",
+    " ": "Space",
+    "space": "Space",
+    "backslash": "\\",
+    "tab": "Tab",
+    "*": "\\\\*",
+    "enter": "Enter"
+}
+
 def parse(tokenized_grammar):
     """
     Given a list representing the tokenized grammar, return a dictionary
@@ -29,8 +39,8 @@ def parse_token(token):
     Given a symbol and a list of modifiers, return a string representing
     the parsed token.
     """
-    if token["symbol"] == " ":
-        token["symbol"] = "Space"
+    if token["symbol"] in SPECIAL_CHARACTERS:
+        token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 
     if "ctrl" in token["modifiers"]:
         return "C-" + token["symbol"]
