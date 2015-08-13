@@ -51,9 +51,10 @@ def read_input():
         for word in words:
             if word in MODE_GRAMMAR:
                 os.system("tmux send-keys " + MODE_GRAMMAR[word])
-                print(word + " -> " + MODE_GRAMMAR[word])
+                # The \r is needed when outputting in raw mode.
+                print(word + " -> " + MODE_GRAMMAR[word] + "\r")
             else:
-                print("Unrecognized rule: " + word)
+                print("Unrecognized rule: " + word + "\r")
                 break
 
 def interpret():
