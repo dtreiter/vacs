@@ -1,7 +1,22 @@
 from functions import *
 
 grammar = {
-    "tags": "<ctrl>]",
+    "persist": " fs",
+    "persists": " fs",
+    "shelf": "shell",
+    "cell": "shell",
+    "sell": "shell",
+    "show": "shell",
+    "she'll": "shell",
+    "shall": "shell",
     "okay": "fd",
-    "helm": " :"
+    "switch": " bb",
+    "search": " ss",
+    "lip": " ww",
+    "flip": " ww",
+    "flick": " ww",
+    "helm": " :",
+    "reload": ":e!",
+    "compile": " cC<enter>",
+    "home": " :"
 }

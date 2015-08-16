@@ -16,9 +16,9 @@ grammar = {
     "girlie": "{",
     "girly": "{",
     "squiggle": "}",
-    "bracket": "<",
-    "knows": ">",
-    "nose": ">",
+    "bracket": "<lbracket>",
+    "knows": "<rbracket>",
+    "nose": "<rbracket>",
     "*": "*",
     "~": "~",
     "`": "`",
@@ -164,6 +164,12 @@ grammar = {
 
     # General
     "trace": "()<left>",
+    "array": "[]<left>",
+    "parade": "[]<left>",
+    "hooray": "[]<left>",
+    "rate": "[]<left>",
+    "list": "{}<left>",
+    "tag": "<lbracket><rbracket><left>",
     "string": "<quote><quote><left>",
     "compare": " == ",
     "equals": " = ",
@@ -174,5 +180,6 @@ grammar = {
     "clapp": ":",
     "minus": " - ",
 
-    "lower": lowercase
+    "lower": lowercase,
+    "blower": lowercase
 }

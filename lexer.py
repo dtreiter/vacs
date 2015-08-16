@@ -9,7 +9,9 @@ SPECIALS = [
     "left",
     "right",
     "quote",
-    "backslash"
+    "backslash",
+    "lbracket",
+    "rbracket"
 ]
 MODIFIERS = ["ctrl", "shift"]
 
