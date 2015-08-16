@@ -7,7 +7,9 @@ SPECIALS = [
     "up",
     "down",
     "left",
-    "right"
+    "right",
+    "quote",
+    "backslash"
 ]
 MODIFIERS = ["ctrl", "shift"]
 

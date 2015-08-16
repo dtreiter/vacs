@@ -8,6 +8,8 @@ SPECIAL_CHARACTERS = {
     "down": "Down",
     "left": "Left",
     "right": "Right",
+    "quote": "\\\"",
+    "backslash": "\\\\",
     " ": "Space",
     "*": "\\\\*"
 }
