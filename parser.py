@@ -28,20 +28,28 @@ def parse(tokenized_grammar):
 def parse_tokens(tokens):
     """
     Given a list of tokens, return a string representing the parsed tokens.
+    If the list of tokens is a function reference, return the function
+    reference.
     """
     parsed = []
     for token in tokens:
         parsed.append(parse_token(token))
 
-    # Convert list to string.
-    return " ".join(parsed)
+    if callable(parsed[0]):
+        return parsed[0]
+    else:
+        # Convert list to string.
+        return " ".join(parsed)
 
 def parse_token(token):
     """
     Given a symbol and a list of modifiers, return a string representing
     the parsed token.
+    If the symbol is a function reference, return the function reference.
     """
-    if token["symbol"] in SPECIAL_CHARACTERS:
+    if callable(token["symbol"]):
+        return token["symbol"]
+    elif token["symbol"] in SPECIAL_CHARACTERS:
         token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 
     if "ctrl" in token["modifiers"]:

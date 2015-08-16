@@ -8,7 +8,8 @@ def dump_grammar(grammar, output_file):
     """
     Writes a given grammar file to output_file as a human readable dictionary.
     """
-    dump = "grammar = {\n"
+    dump = "from functions import *\n"
+    dump += "grammar = {\n"
     for key in grammar:
         if callable(grammar[key]):
             value = grammar[key].__name__

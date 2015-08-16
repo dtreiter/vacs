@@ -48,11 +48,19 @@ def read_input():
     while 1:
         data = os.read(0, 1024).lower()
         words = data.split(" ")
-        for word in words:
+        for index, word in enumerate(words):
             if word in MODE_GRAMMAR:
-                os.system("tmux send-keys " + MODE_GRAMMAR[word])
-                # The \r is needed when outputting in raw mode.
-                print(word + " -> " + MODE_GRAMMAR[word] + "\r")
+                if callable(MODE_GRAMMAR[word]):
+                    # Run the rest of the text through the function.
+                    text = " ".join(words[index + 1:])
+                    result = MODE_GRAMMAR[word](text)
+                    os.system("tmux send-keys \"" + result + "\"")
+                    print("FUNCTION " + word + " -> " + result + "\r")
+                    break
+                else:
+                    os.system("tmux send-keys " + MODE_GRAMMAR[word])
+                    # The \r is needed when outputting in raw mode.
+                    print(word + " -> " + MODE_GRAMMAR[word] + "\r")
             else:
                 print("Unrecognized rule: " + word + "\r")
                 break

@@ -19,8 +19,14 @@ def lex(grammar):
     """
     tokenized_grammar = []
     for entry in grammar:
-        characters = split_characters(grammar[entry])
-        tokens = tokenize(characters)
+        if callable(grammar[entry]):
+            tokens = [{
+                "modifiers": [],
+                "symbol": grammar[entry]
+            }]
+        else:
+            characters = split_characters(grammar[entry])
+            tokens = tokenize(characters)
         tokenized_entry = {
             "key": entry,
             "tokens": tokens

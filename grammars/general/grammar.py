@@ -174,5 +174,7 @@ grammar = {
     "increments": " += ",
     "clap": ":",
     "clapp": ":",
-    "minus": " - "
+    "minus": " - ",
+
+    "lower": lowercase
 }
