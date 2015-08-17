@@ -100,6 +100,7 @@ grammar = {
     "daniel" : "d",
     "dede": "dd",
     "didi": "dd",
+    "dd": "dd",
     "edward" : "e",
     "frederick" : "f",
     "gary" : "g",
@@ -181,5 +182,14 @@ grammar = {
     "minus": " - ",
 
     "lower": lowercase,
-    "blower": lowercase
+    "blower": lowercase,
+    "upper": uppercase,
+    "camel": camelcase,
+    "spine": spinecase,
+    "say": titlecase,
+    "method": dotcase,
+    "joint": nospaces,
+    "join": nospaces,
+    "spell": nospaces,
+    "snake": snakecase
 }

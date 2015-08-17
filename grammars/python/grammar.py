@@ -16,5 +16,7 @@ grammar = {
     "condition": "if" + hippie_expand,
     "else": "else:<enter>",
     "value": "d<quote>" + hippie_expand,
-    "loop": "frn" + hippie_expand
+    "loop": "frn" + hippie_expand,
+
+    "magic": magic_case
 }
