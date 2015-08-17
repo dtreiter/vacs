@@ -54,7 +54,7 @@ def read_input():
                     # Run the rest of the text through the function.
                     text = " ".join(words[index + 1:])
                     result = MODE_GRAMMAR[word](text)
-                    os.system("tmux send-keys \"" + result + "\"")
+                    os.system("tmux send-keys -l \"" + result + "\"")
                     print("FUNCTION " + word + " -> " + result + "\r")
                     break
                 else:
