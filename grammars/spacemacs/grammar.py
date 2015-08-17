@@ -3,6 +3,7 @@ from functions import *
 grammar = {
     "persist": " fs",
     "persists": " fs",
+    "shell": "shell",
     "shelf": "shell",
     "cell": "shell",
     "sell": "shell",
