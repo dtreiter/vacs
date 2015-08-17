@@ -13,7 +13,7 @@ SPECIALS = [
     "lbracket",
     "rbracket"
 ]
-MODIFIERS = ["ctrl", "shift"]
+MODIFIERS = ["ctrl", "alt"]
 
 def lex(grammar):
     """

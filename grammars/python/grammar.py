@@ -1,6 +1,6 @@
 from functions import *
 
-hippie_expand = "<ctrl>k"
+hippie_expand = "<alt>/"
 
 grammar = {
     "python": "python ",

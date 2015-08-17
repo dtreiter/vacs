@@ -21,6 +21,11 @@ SPECIAL_CHARACTERS = {
     "*": "\\\\*"
 }
 
+MODIFIERS = {
+    "ctrl": "C-",
+    "alt": "M-"
+}
+
 def parse(tokenized_grammar):
     """
     Given a list representing the tokenized grammar, return a dictionary
@@ -61,7 +66,17 @@ def parse_token(token):
     elif token["symbol"] in SPECIAL_CHARACTERS:
         token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 
-    if "ctrl" in token["modifiers"]:
-        return "C-" + token["symbol"]
-    else:
-        return token["symbol"]
+    parsed_modifiers = parse_modifiers(token["modifiers"])
+    return parsed_modifiers + token["symbol"]
+
+def parse_modifiers(modifiers):
+    """
+    Given a list of modifiers parse them into the form the interpreter needs.
+    Returns the parsed modifiers as a string.
+    """
+    parsed_modifiers = ""
+    for modifier in modifiers:
+        if modifier in MODIFIERS:
+            parsed_modifiers += MODIFIERS[modifier]
+
+    return parsed_modifiers
