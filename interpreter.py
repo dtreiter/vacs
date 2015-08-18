@@ -62,7 +62,8 @@ def read_input():
                         print(str(sys.exc_info()[0]) + "\r")
                     break
                 else:
-                    os.system("tmux send-keys " + MODE_GRAMMAR[word])
+                    #os.system("tmux send-keys " + MODE_GRAMMAR[word])
+                    os.system("VBoxManage controlvm SiftMri keyboardputscancode " + MODE_GRAMMAR[word])
                     # The \r is needed when outputting in raw mode.
                     print(word + " -> " + MODE_GRAMMAR[word] + "\r")
             else:

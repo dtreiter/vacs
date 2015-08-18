@@ -1,7 +1,7 @@
 import os
 import importlib
 import lexer
-import parser
+import vbox_parser as parser
 import utilities
 
 def compile_grammars():
