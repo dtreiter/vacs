@@ -17,6 +17,7 @@ grammar = {
     "search": " ss",
     "lip": " ww",
     "flip": " ww",
+    "slip": " ww",
     "flick": " ww",
     "helm": " :",
     "reload": ":e!",

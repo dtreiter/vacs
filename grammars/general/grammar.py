@@ -106,6 +106,7 @@ grammar = {
     "gary" : "g",
     "garry" : "g",
     "gerry" : "g",
+    "gg": "gg",
     "gigi": "gg",
     "gege": "gg",
     "gerald": "G",
