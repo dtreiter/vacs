@@ -21,3 +21,6 @@ def dump_grammar(grammar, output_file):
     dump = dump[:-2]
     dump += "\n}"
     output_file.write(dump)
+
+def create_grammar(grammar_name):
+    pass
