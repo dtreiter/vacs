@@ -22,5 +22,8 @@ grammar = {
     "helm": " :",
     "reload": ":e!",
     "compile": " cC<enter>",
-    "home": " :"
+    "home": " :",
+    "status": " gs",
+    "difference": " gd",
+    "committing": " gh"
 }

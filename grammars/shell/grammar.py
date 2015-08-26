@@ -5,6 +5,5 @@ grammar = {
   "get": "git ",
   "commit": "commit ",
   "addition": "add ",
-  "message": "-m ''<left>",
-  "status": "status"
+  "message": "-m ''<left>"
 }

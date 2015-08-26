@@ -4,6 +4,9 @@ def lowercase(text):
 def uppercase(text):
     return text.upper()
 
+def capitalcase(text):
+    return ''.join(letter for letter in text.title() if letter.isalpha())
+
 def camelcase(text):
     output = ''.join(letter for letter in text.title() if letter.isalpha())
     return output[0].lower() + output[1:]

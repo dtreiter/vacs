@@ -8,7 +8,10 @@ grammar = {
     "self": "self",
     "return": "return ",
     "from": "from ",
-    "print": "print",
+    "print": "print()<left>",
+    "range": "range()<left>",
+    "links": "len()<left>",
+    "length": "len()<left>",
     "comment": "# ",
     "import": "import ",
     "hippie": hippie_expand,
@@ -17,6 +20,7 @@ grammar = {
     "else": "else:<enter>",
     "value": "d<quote>" + hippie_expand,
     "loop": "frn" + hippie_expand,
+    "luke": "frn" + hippie_expand,
 
     "magic": magic_case
 }
