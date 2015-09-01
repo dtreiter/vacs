@@ -53,9 +53,13 @@ def read_input():
                 if callable(MODE_GRAMMAR[word]):
                     # Run the rest of the text through the function.
                     text = " ".join(words[index + 1:])
-                    result = MODE_GRAMMAR[word](text)
-                    os.system("tmux send-keys -l \"" + result + "\"")
-                    print("FUNCTION " + word + " -> " + result + "\r")
+                    try:
+                        result = MODE_GRAMMAR[word](text)
+                        os.system("tmux send-keys -l \"" + result + "\"")
+                        print("FUNCTION " + word + " -> " + result + "\r")
+                    except:
+                        print("ERROR: Unexpected error in grammar function" + "\r")
+                        print(str(sys.exc_info()[0]) + "\r")
                     break
                 else:
                     os.system("tmux send-keys " + MODE_GRAMMAR[word])
