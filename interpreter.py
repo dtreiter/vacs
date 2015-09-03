@@ -58,15 +58,18 @@ def read_input():
                         result = MODE_GRAMMAR[word](text)
                         #os.system("tmux send-keys -l \"" + result + "\"")
                         scancodes = vbox_parser.parse_string(result)
-                        os.system("VBoxManage controlvm SiftMri keyboardputscancode " + scancodes)
-                        print("FUNCTION " + word + " -> " + result + "\r")
+                        for scancode in scancodes.split(" "):
+                            os.system("VBoxManage controlvm SiftMri keyboardputscancode " + scancode)
+                        print("FUNCTION " + word + " -> " + scancodes + "\r")
                     except:
                         print("ERROR: Unexpected error in grammar function" + "\r")
                         print(str(sys.exc_info()[0]) + "\r")
                     break
                 else:
                     #os.system("tmux send-keys " + MODE_GRAMMAR[word])
-                    os.system("VBoxManage controlvm SiftMri keyboardputscancode " + MODE_GRAMMAR[word])
+                    scancodes = MODE_GRAMMAR[word]
+                    for scancode in scancodes.split(" "):
+                        os.system("VBoxManage controlvm SiftMri keyboardputscancode " + scancode)
                     # The \r is needed when outputting in raw mode.
                     print(word + " -> " + MODE_GRAMMAR[word] + "\r")
             else:

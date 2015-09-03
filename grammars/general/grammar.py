@@ -60,7 +60,6 @@ grammar = {
     "backspace": "<ctrl>h",
     "complete": "<ctrl>n",
     "insert": "<ctrl>r",
-    "stump": "<ctrl>t",
     "window": "<ctrl>w",
     "extend": "<ctrl>x",
     "escape": "<esc>",
@@ -71,6 +70,11 @@ grammar = {
     "enter": "<enter>",
     "yes": "<enter>",
     "yeah": "<enter>",
+
+    # Stump window manager
+    "stump": "<ctrl>t",
+    "other": "<ctrl>to",
+    "split": "<ctrl>ts",
 
     # Alphabet
     " ": " ",
