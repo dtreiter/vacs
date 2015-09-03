@@ -4,6 +4,7 @@ import tty
 import importlib
 import modes
 import utilities
+import vbox_parser
 
 # Holds all grammar rules that the interpreter will use.
 MODE_GRAMMAR = {}
@@ -55,7 +56,9 @@ def read_input():
                     text = " ".join(words[index + 1:])
                     try:
                         result = MODE_GRAMMAR[word](text)
-                        os.system("tmux send-keys -l \"" + result + "\"")
+                        #os.system("tmux send-keys -l \"" + result + "\"")
+                        scancodes = vbox_parser.parse_string(result)
+                        os.system("VBoxManage controlvm SiftMri keyboardputscancode " + scancodes)
                         print("FUNCTION " + word + " -> " + result + "\r")
                     except:
                         print("ERROR: Unexpected error in grammar function" + "\r")

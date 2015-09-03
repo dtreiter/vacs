@@ -55,6 +55,15 @@ def keydown(code):
 def keyup(code):
     return format(int(code) + 128, "x")
 
+def parse_string(string):
+    tokens = []
+    for letter in list(string):
+        tokens.append({
+            "modifiers": [],
+            "symbol": letter
+        })
+
+    return parser.parse_tokens(tokens)
 
 
 parser.parse_token = parse_token
