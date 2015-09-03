@@ -4,8 +4,25 @@ def parse_token(token):
     if callable(token["symbol"]):
         return token["symbol"]
 
+    normalize_shift(token)
     scancode = get_scancode(token["symbol"])
     return scancode
+
+def normalize_shift(token):
+    """
+    Converts a symbol which requires the shift key to a plain symbol with the
+    shift modifier.
+
+    For example:
+      : -> <shift>;
+    """
+    if token["symbol"] in SHIFT_SCANCODES:
+        token["modifiers"].append("shift")
+        token["symbol"] = SHIFT_SCANCODES[token["symbol"]]
+    elif token["symbol"].istitle():
+        token["modifiers"].append("shift")
+        token["symbol"] = token["symbol"].lower()
+
 
 def get_scancode(symbol):
     if symbol in scancodes:
@@ -21,6 +38,20 @@ parser.parse_token = parse_token
 def parse(tokenized_grammar):
     return parser.parse(tokenized_grammar)
 
+
+SHIFT_SCANCODES = {
+    "_": "-",
+    "+": "=",
+    "{": "[",
+    "]": "}",
+    ":": ";",
+    "\"": "'",
+    "~": "`",
+    "|": "\\",
+    "<": ",",
+    ">": ".",
+    "?": "/"
+}
 
 scancodes = {
     "esc": 1,
