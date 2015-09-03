@@ -16,9 +16,9 @@ def normalize_shift(token):
     For example:
       : -> <shift>;
     """
-    if token["symbol"] in SHIFT_SCANCODES:
+    if token["symbol"] in SHIFT_SYMBOLS:
         token["modifiers"].append("shift")
-        token["symbol"] = SHIFT_SCANCODES[token["symbol"]]
+        token["symbol"] = SHIFT_SYMBOLS[token["symbol"]]
     elif token["symbol"].istitle():
         token["modifiers"].append("shift")
         token["symbol"] = token["symbol"].lower()
@@ -39,7 +39,7 @@ def parse(tokenized_grammar):
     return parser.parse(tokenized_grammar)
 
 
-SHIFT_SCANCODES = {
+SHIFT_SYMBOLS = {
     "_": "-",
     "+": "=",
     "{": "[",
