@@ -5,8 +5,8 @@ def parse_token(token):
         return token["symbol"]
 
     normalize_shift(token)
-    scancode = get_scancode(token["symbol"])
-    return scancode
+    scancodes = get_scancodes(token)
+    return scancodes
 
 def normalize_shift(token):
     """
@@ -23,15 +23,38 @@ def normalize_shift(token):
         token["modifiers"].append("shift")
         token["symbol"] = token["symbol"].lower()
 
+def get_modifier_keydowns(token):
+    keydowns = []
+    for modifier in token["modifiers"]:
+        keydowns.append(keydown(MODIFIER_SCANCODES[modifier]))
 
-def get_scancode(symbol):
-    if symbol in scancodes:
-        keydown = scancodes[symbol]
-        keyup = keydown + 128
-        keystring = format(keydown, "x") + " " + format(keyup, "x")
-        return keystring
+    return keydowns
 
-    return ""
+def get_modifier_keyups(token):
+    keyups = []
+    for modifier in token["modifiers"]:
+        keyups.append(keyup(MODIFIER_SCANCODES[modifier]))
+
+    return keyups
+
+def get_scancodes(token):
+    if token["symbol"] in SCANCODES:
+        code = SCANCODES[token["symbol"]]
+        scancodes = []
+        scancodes.extend(get_modifier_keydowns(token))
+        scancodes.extend([keydown(code), keyup(code)])
+        scancodes.extend(get_modifier_keyups(token))
+        return " ".join(scancodes)
+    else:
+        print("ERROR: Symbol '" + token["symbol"] + "' not in scan codes list.")
+        return "" # TODO Should maybe throw exception?
+
+def keydown(code):
+    return format(int(code), "x")
+
+def keyup(code):
+    return format(int(code) + 128, "x")
+
 
 
 parser.parse_token = parse_token
@@ -43,17 +66,33 @@ SHIFT_SYMBOLS = {
     "_": "-",
     "+": "=",
     "{": "[",
-    "]": "}",
+    "}": "]",
     ":": ";",
-    "\"": "'",
+    "quote": "'",
     "~": "`",
     "|": "\\",
-    "<": ",",
-    ">": ".",
-    "?": "/"
+    "lbracket": ",",
+    "rbracket": ".",
+    "?": "/",
+    "!": "1",
+    "@": "2",
+    "#": "3",
+    "$": "4",
+    "%": "5",
+    "^": "6",
+    "&": "7",
+    "*": "8",
+    "(": "9",
+    ")": "0"
 }
 
-scancodes = {
+MODIFIER_SCANCODES = {
+    "ctrl": "29",
+    "alt": "56",
+    "shift": "42"
+}
+
+SCANCODES = {
     "esc": 1,
     "1": 2,
     "2": 3,
@@ -93,27 +132,27 @@ scancodes = {
     "k": 37,
     "l": 38,
     ";": 39,
-    "`": 40,
-    "shift": 41,
-    "backslash": 42,
-    "z": 43,
-    "x": 44,
-    "c": 45,
-    "v": 46,
-    "b": 47,
-    "n": 48,
-    "m": 49,
-    ",": 50,
-    ".": 51,
-    "/": 52,
-    "rshift": 53,
-    "ptscr": 54,
-    "alt": 55,
-    " ": 56,
-    "cpslk": 57,
-    "f1": 58,
-    "f2": 59,
-    #"": 60,
+    "'": 40,
+    "`": 41,
+    "shift": 42,
+    "backslash": 43,
+    "z": 44,
+    "x": 45,
+    "c": 46,
+    "v": 47,
+    "b": 48,
+    "n": 49,
+    "m": 50,
+    ",": 51,
+    ".": 52,
+    "/": 53,
+    "rshift": 54,
+    "ptscr": 55,
+    "alt": 56,
+    " ": 57,
+    "cpslk": 58,
+    "f1": 59,
+    "f2": 60,
     #"": 61,
     #"": 62,
     #"": 63,

@@ -60,6 +60,7 @@ grammar = {
     "backspace": "<ctrl>h",
     "complete": "<ctrl>n",
     "insert": "<ctrl>r",
+    "stump": "<ctrl>t",
     "window": "<ctrl>w",
     "extend": "<ctrl>x",
     "escape": "<esc>",
