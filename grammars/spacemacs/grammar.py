@@ -19,10 +19,11 @@ grammar = {
     "flip": " ww",
     "slip": " ww",
     "flick": " ww",
+    "viewing": " bv",
     "helm": " :",
+    "home": " :",
     "reload": ":e!",
     "compile": " cC<enter>",
-    "home": " :",
     "status": " gs",
     "difference": " gd",
     "committing": " gh"
