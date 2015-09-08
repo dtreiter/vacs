@@ -1,7 +1,7 @@
 import argparse
 import utilities
 import compiler
-import interpreter
+from interpreters.core import CoreInterpreter as Interpreter
 
 def main():
     """
@@ -22,6 +22,7 @@ def main():
     elif arguments.compile:
         compiler.compile_grammars()
     else:
+        interpreter = Interpreter()
         interpreter.interpret()
 
 
