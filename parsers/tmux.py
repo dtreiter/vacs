@@ -3,6 +3,7 @@ from core import BaseParser
 SPECIAL_CHARACTERS = {
     "esc": "Escape",
     "enter": "Enter",
+    "bspace": "Bspace",
     "tab": "Tab",
     "up": "Up",
     "down": "Down",

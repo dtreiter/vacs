@@ -44,7 +44,7 @@ SCANCODES = {
     "0": 11,
     "-": 12,
     "=": 13,
-    "bksp": 14,
+    "bspace": 14,
     "tab": 15,
     "q": 16,
     "w": 17,
@@ -154,11 +154,11 @@ class VboxParser(BaseParser):
 
     @classmethod
     def keydown(cls, code):
-        return format(int(code), "x")
+        return format(int(code), "02x")
 
     @classmethod
     def keyup(cls, code):
-        return format(int(code) + 128, "x")
+        return format(int(code) + 128, "02x")
 
     @classmethod
     def parse_string(cls, string):
