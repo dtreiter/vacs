@@ -1,7 +1,8 @@
 import argparse
 import utilities
 import compiler
-from interpreters.core import CoreInterpreter as Interpreter
+from interpreters.tmux import TmuxInterpreter as Interpreter
+#from interpreters.vbox import VboxInterpreter as Interpreter
 
 def main():
     """
