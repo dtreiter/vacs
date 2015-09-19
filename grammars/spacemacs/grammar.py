@@ -1,10 +1,10 @@
 from functions import *
 
+def leader(keys):
+    return "<alt>M" + keys
+
+
 grammar = {
-    "persist": " fs",
-    "persists": " fs",
-    "process": " fs",
-    "processed": " fs",
     "shell": "shell",
     "shelf": "shell",
     "cell": "shell",
@@ -13,19 +13,24 @@ grammar = {
     "she'll": "shell",
     "shall": "shell",
     "okay": "fd",
-    "switch": " bb",
-    "search": " ss",
-    "lip": " ww",
-    "flip": " ww",
-    "flipped": " ww",
-    "slip": " ww",
-    "flick": " ww",
-    "viewing": " bv",
-    "helm": " :",
-    "home": " :",
     "reload": ":e!",
-    "compile": " cC<enter>",
-    "status": " gs",
-    "difference": " gd",
-    "committing": " gh"
+    "persist": leader("fs"),
+    "persists": leader("fs"),
+    "process": leader("fs"),
+    "processed": leader("fs"),
+    "switch": leader("bb"),
+    "search": leader("ss"),
+    "frame": leader("wo"),
+    "lip": leader("ww"),
+    "flip": leader("ww"),
+    "flipped": leader("ww"),
+    "slip": leader("ww"),
+    "flick": leader("ww"),
+    "viewing": leader("bv"),
+    "helm": leader(":"),
+    "home": leader(":"),
+    "compile": leader("cC") + "<enter>",
+    "status": leader("gs"),
+    "difference": leader("gd"),
+    "committing": leader("gh")
 }
