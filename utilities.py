@@ -1,5 +1,13 @@
 import os
 
+def log(string):
+    """
+    Prints the string followed by a '\r', which is necessary when the terminal is
+    in the raw mode.
+    """
+    print(string + "\r")
+
+
 def child_directories(directory):
     return [name for name in os.listdir(directory)
             if os.path.isdir(os.path.join(directory, name))]

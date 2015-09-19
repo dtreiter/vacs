@@ -67,18 +67,18 @@ class CoreInterpreter():
                         result = self.mode_grammar[word](text)
                         keys = self.parser.parse_string(result)
                         self.send_keystrokes(keys)
-                        print("FUNCTION " + word + " -> " + keys + "\r")
+                        utilities.log("FUNCTION " + word + " -> " + keys)
                     except:
-                        print("ERROR: Unexpected error in grammar function" + "\r")
-                        print(str(sys.exc_info()[0]) + "\r")
+                        utilities.log("ERROR: Unexpected error in grammar function")
+                        utilities.log(str(sys.exc_info()[0]))
                     break
                 else:
                     keys = self.mode_grammar[word]
                     self.send_keystrokes(keys)
                     # The \r is needed when outputting in raw mode.
-                    print(word + " -> " + self.mode_grammar[word] + "\r")
+                    utilities.log(word + " -> " + self.mode_grammar[word])
             else:
-                print("Unrecognized rule: " + word + "\r")
+                utilities.log("Unrecognized rule: " + word)
                 break
 
     def send_keystrokes(self, words):
