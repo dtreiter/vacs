@@ -159,14 +159,3 @@ class VboxParser(BaseParser):
     @classmethod
     def keyup(cls, code):
         return format(int(code) + 128, "02x")
-
-    @classmethod
-    def parse_string(cls, string):
-        tokens = []
-        for letter in list(string):
-            tokens.append({
-                "modifiers": [],
-                "symbol": letter
-            })
-
-        return cls.parse_tokens(tokens)

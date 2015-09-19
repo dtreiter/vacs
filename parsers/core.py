@@ -50,3 +50,17 @@ class BaseParser():
         Returns the parsed modifiers as a string.
         """
         pass
+
+    @classmethod
+    def parse_string(cls, string):
+        """
+        Creates a token for each letter in string and then parses them.
+        """
+        tokens = []
+        for letter in list(string):
+            tokens.append({
+                "modifiers": [],
+                "symbol": letter
+            })
+
+        return cls.parse_tokens(tokens)
