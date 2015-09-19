@@ -82,7 +82,7 @@ class CoreInterpreter():
                 break
 
     def send_keystrokes(self, words):
-        pass
+        raise NotImplementedError()
 
     def interpret(self):
         grammars = self.load_grammars()

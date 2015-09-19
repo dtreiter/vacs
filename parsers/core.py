@@ -39,7 +39,7 @@ class BaseParser():
         the parsed token.
         If the symbol is a function reference, return the function reference.
         """
-        pass
+        raise NotImplementedError()
 
     @classmethod
     def parse_modifiers(cls, modifiers):
@@ -49,7 +49,7 @@ class BaseParser():
         Given a list of modifiers parse them into the form the interpreter needs.
         Returns the parsed modifiers as a string.
         """
-        pass
+        raise NotImplementedError()
 
     @classmethod
     def parse_string(cls, string):
