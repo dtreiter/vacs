@@ -5,6 +5,7 @@ import importlib
 
 import modes
 import utilities
+from grammars.filter_compiled import grammar_filter
 
 class CoreInterpreter():
     def __init__(self):
@@ -59,15 +60,21 @@ class CoreInterpreter():
         words. Otherwise send the rule's value.
         """
         for index, word in enumerate(words):
+            # Correct the word if it is in the grammar_filter.
+            if word in grammar_filter:
+                utilities.log(word + " => " + grammar_filter[word], verbose=True)
+                word = grammar_filter[word]
+
             if word in self.mode_grammar:
                 if callable(self.mode_grammar[word]):
-                    # Run the rest of the text through the function.
-                    text = " ".join(words[index + 1:])
                     try:
+                        # Run the rest of the text through the function.
+                        text = " ".join(words[index + 1:])
                         result = self.mode_grammar[word](text)
                         keys = self.parser.parse_string(result)
                         self.send_keystrokes(keys)
-                        utilities.log("FUNCTION " + word + " -> " + keys)
+                        utilities.log(word + " (FUNCTION) -> " + result)
+                        utilities.log("parsed: " + keys, verbose=True)
                     except:
                         utilities.log("ERROR: Unexpected error in grammar function")
                         utilities.log(str(sys.exc_info()[0]))
@@ -75,7 +82,6 @@ class CoreInterpreter():
                 else:
                     keys = self.mode_grammar[word]
                     self.send_keystrokes(keys)
-                    # The \r is needed when outputting in raw mode.
                     utilities.log(word + " -> " + self.mode_grammar[word])
             else:
                 utilities.log("Unrecognized rule: " + word)

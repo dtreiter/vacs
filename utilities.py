@@ -1,11 +1,13 @@
 import os
+import config
 
-def log(string):
+def log(string, verbose=False):
     """
     Prints the string followed by a '\r', which is necessary when the terminal is
     in the raw mode.
     """
-    print(string + "\r")
+    if (not verbose) or (verbose and config.verbose):
+        print(string + "\r")
 
 
 def child_directories(directory):
@@ -14,7 +16,7 @@ def child_directories(directory):
 
 def dump_grammar(grammar, output_file):
     """
-    Writes a given grammar file to output_file as a human readable dictionary.
+    Writes a given grammar dictionary to output_file as a human readable dictionary.
     """
     dump = "from functions import *\n"
     dump += "grammar = {\n"
@@ -24,6 +26,19 @@ def dump_grammar(grammar, output_file):
         else:
             value = "\"" + grammar[key] + "\""
         dump += "    \"" + key + "\": " + value + ",\n"
+
+    # Remove trailing comma
+    dump = dump[:-2]
+    dump += "\n}"
+    output_file.write(dump)
+
+def dump_filter(grammar_filter, output_file):
+    """
+    Writes a given grammar_filter to output_file as a human readable dictionary.
+    """
+    dump = "grammar_filter = {\n"
+    for key in grammar_filter:
+        dump += "    \"" + key + "\": \"" + grammar_filter[key] + "\",\n"
 
     # Remove trailing comma
     dump = dump[:-2]

@@ -1,8 +1,8 @@
 import argparse
 import utilities
 import compiler
-from interpreters.tmux import TmuxInterpreter as Interpreter
-#from interpreters.vbox import VboxInterpreter as Interpreter
+#from interpreters.tmux import TmuxInterpreter as Interpreter
+from interpreters.vbox import VboxInterpreter as Interpreter
 
 def main():
     """
@@ -21,6 +21,7 @@ def main():
     if arguments.create_grammar:
         utilities.create_grammar(arguments.create_grammar)
     elif arguments.compile:
+        compiler.compile_filter()
         compiler.compile_grammars()
     else:
         interpreter = Interpreter()
