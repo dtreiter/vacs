@@ -11,9 +11,10 @@ class CoreInterpreter():
     def __init__(self):
         # Holds all grammar rules that the interpreter will use.
         self.mode_grammar = {}
+        self.mode_grammar_compiled = {}
         self.parser = None
 
-    def load_grammars(self):
+    def load_grammars(self, filename):
         """
         Loads each compiled grammar from the subdirectories of the grammars
         directory.
@@ -21,14 +22,14 @@ class CoreInterpreter():
         grammars = {}
         directories = utilities.child_directories("grammars")
         for directory in directories:
-            print("Loading grammar: '" + directory + "'")
-            module = ".".join(["grammars", directory, "grammar_compiled"])
+            utilities.log("Loading grammar: '" + directory + "'", verbose=True)
+            module = ".".join(["grammars", directory, filename])
             grammar = importlib.import_module(module)
             grammars[directory] = grammar.grammar
 
         return grammars
 
-    def set_mode(self, mode, grammars):
+    def set_mode(self, mode, grammars, compiled_grammars):
         """
         Populates self.mode_grammar with each grammar specified by the mode.
         """
@@ -39,6 +40,7 @@ class CoreInterpreter():
             for grammar in mode_grammars:
                 # Add the rules from the grammar to self.mode_grammar.
                 self.mode_grammar.update(grammars[grammar])
+                self.mode_grammar_compiled.update(compiled_grammars[grammar])
         else:
             print("Unrecognized mode: " + mode)
 
@@ -65,12 +67,12 @@ class CoreInterpreter():
                 utilities.log(word + " => " + grammar_filter[word], verbose=True)
                 word = grammar_filter[word]
 
-            if word in self.mode_grammar:
-                if callable(self.mode_grammar[word]):
+            if word in self.mode_grammar_compiled:
+                if callable(self.mode_grammar_compiled[word]):
                     try:
                         # Run the rest of the text through the function.
                         text = " ".join(words[index + 1:])
-                        result = self.mode_grammar[word](text)
+                        result = self.mode_grammar_compiled[word](text)
                         keys = self.parser.parse_string(result)
                         self.send_keystrokes(keys)
                         utilities.log(word + " (FUNCTION) -> " + result)
@@ -80,7 +82,7 @@ class CoreInterpreter():
                         utilities.log(str(sys.exc_info()[0]))
                     break
                 else:
-                    keys = self.mode_grammar[word]
+                    keys = self.mode_grammar_compiled[word]
                     self.send_keystrokes(keys)
                     utilities.log(word + " -> " + self.mode_grammar[word])
             else:
@@ -91,6 +93,7 @@ class CoreInterpreter():
         raise NotImplementedError()
 
     def interpret(self):
-        grammars = self.load_grammars()
-        self.set_mode("python", grammars)
+        grammars = self.load_grammars("grammar")
+        compiled_grammars = self.load_grammars("grammar_compiled")
+        self.set_mode("python", grammars, compiled_grammars)
         self.read_input()
