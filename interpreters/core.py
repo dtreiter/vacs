@@ -93,7 +93,9 @@ class CoreInterpreter():
         raise NotImplementedError()
 
     def interpret(self):
+        utilities.log("Loading grammars...")
         grammars = self.load_grammars("grammar")
         compiled_grammars = self.load_grammars("grammar_compiled")
         self.set_mode("python", grammars, compiled_grammars)
+        utilities.log("Loading complete.")
         self.read_input()

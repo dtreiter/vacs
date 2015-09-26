@@ -13,7 +13,7 @@ def compile_grammars():
     """
     dirs = utilities.child_directories("grammars")
     for directory in dirs:
-        print("Parsing grammar directory: '" + directory + "'")
+        utilities.log("Parsing grammar directory: '" + directory + "'")
         module = ".".join(["grammars", directory, "grammar"])
         grammar = importlib.import_module(module)
         compiled_grammar = parser.parse(lexer.lex(grammar.grammar))
