@@ -1,8 +1,8 @@
 import argparse
-import utilities
+
+import config
 import compiler
-#from interpreters.tmux import TmuxInterpreter as Interpreter
-from interpreters.vbox import VboxInterpreter as Interpreter
+import utilities
 
 def main():
     """
@@ -10,6 +10,11 @@ def main():
     If no arguments are provided, start the interpreter.
     """
     argument_parser = argparse.ArgumentParser(description="Voice Accessibility Control System")
+    argument_parser.add_argument("connection",
+                                 help="Where vacs should send key strokes to",
+                                 default="vbox",
+                                 choices=["vbox", "tmux"],
+                                 action="store")
     argument_parser.add_argument("--create-grammar",
                                  help="Create the files necessary for a new grammar",
                                  action="store")
@@ -18,13 +23,15 @@ def main():
                                  action="store_true")
     arguments = argument_parser.parse_args()
 
+    config.set_connection(arguments.connection)
+
     if arguments.create_grammar:
         utilities.create_grammar(arguments.create_grammar)
     elif arguments.compile:
         compiler.compile_filter()
         compiler.compile_grammars()
     else:
-        interpreter = Interpreter()
+        interpreter = config.Interpreter()
         interpreter.interpret()
 
 

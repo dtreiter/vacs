@@ -1,10 +1,9 @@
 import os
 import importlib
+
+import config
 import lexer
 import utilities
-#from parsers.tmux import TmuxParser as parser
-from parsers.vbox import VboxParser as parser
-from grammars.grammar_filter import grammar_filter
 
 def compile_grammars():
     """
@@ -16,7 +15,7 @@ def compile_grammars():
         utilities.log("Parsing grammar directory: '" + directory + "'")
         module = ".".join(["grammars", directory, "grammar"])
         grammar = importlib.import_module(module)
-        compiled_grammar = parser.parse(lexer.lex(grammar.grammar))
+        compiled_grammar = config.Parser.parse(lexer.lex(grammar.grammar))
         grammar_path = os.path.join("grammars", directory, "grammar_compiled.py")
         with open(grammar_path, "w+") as output_file:
             utilities.dump_grammar(compiled_grammar, output_file)
@@ -27,6 +26,7 @@ def compile_filter():
     grammar_filter dictionary. This makes it easy to look up a mistaken word as
     one of the keys of the compiled_filter dictionary.
     """
+    grammar_filter = getattr(importlib.import_module("grammars.grammar_filter"), "grammar_filter")
     compiled_filter = {}
     for key in grammar_filter:
         for value in grammar_filter[key]:

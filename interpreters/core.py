@@ -3,6 +3,7 @@ import sys
 import tty
 import importlib
 
+import config
 import modes
 import utilities
 from grammars.filter_compiled import grammar_filter
@@ -12,7 +13,6 @@ class CoreInterpreter():
         # Holds all grammar rules that the interpreter will use.
         self.mode_grammar = {}
         self.mode_grammar_compiled = {}
-        self.parser = None
 
     def load_grammars(self, filename):
         """
@@ -73,7 +73,7 @@ class CoreInterpreter():
                         # Run the rest of the text through the function.
                         text = " ".join(words[index + 1:])
                         result = self.mode_grammar_compiled[word](text)
-                        keys = self.parser.parse_string(result)
+                        keys = config.Parser.parse_string(result)
                         self.send_keystrokes(keys)
                         utilities.log(word + " (FUNCTION) -> " + result)
                         utilities.log("parsed: " + keys, verbose=True)

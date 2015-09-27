@@ -6,7 +6,7 @@ def log(string, verbose=False):
     Prints the string followed by a '\r', which is necessary when the terminal is
     in the raw mode.
     """
-    if (not verbose) or (verbose and config.verbose):
+    if (not verbose) or (verbose and config.VERBOSE):
         print(string + "\r")
 
 
