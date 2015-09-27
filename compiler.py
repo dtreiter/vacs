@@ -26,7 +26,7 @@ def compile_filter():
     grammar_filter dictionary. This makes it easy to look up a mistaken word as
     one of the keys of the compiled_filter dictionary.
     """
-    grammar_filter = getattr(importlib.import_module("grammars.grammar_filter"), "grammar_filter")
+    grammar_filter = utilities.import_attribute("grammars.grammar_filter", "grammar_filter")
     compiled_filter = {}
     for key in grammar_filter:
         for value in grammar_filter[key]:

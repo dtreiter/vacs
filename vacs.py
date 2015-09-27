@@ -23,7 +23,7 @@ def main():
                                  action="store_true")
     arguments = argument_parser.parse_args()
 
-    config.set_connection(arguments.connection)
+    utilities.set_connection(arguments.connection)
 
     if arguments.create_grammar:
         utilities.create_grammar(arguments.create_grammar)
