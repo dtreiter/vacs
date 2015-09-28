@@ -5,32 +5,20 @@ def leader(keys):
 
 
 grammar = {
-    "shell": "shell",
-    "shelf": "shell",
-    "cell": "shell",
-    "sell": "shell",
-    "show": "shell",
-    "she'll": "shell",
-    "shall": "shell",
-    "okay": "fd",
     "reload": ":e!",
-    "persist": leader("fs"),
-    "persists": leader("fs"),
-    "process": leader("fs"),
-    "processed": leader("fs"),
-    "switch": leader("bb"),
-    "search": leader("ss"),
-    "frame": leader("wo"),
-    "lip": leader("ww"),
+    "shell": "shell",
+    "undo": "<ctrl>_",
+
+    "committing": leader("gh"),
+    "compile": leader("cC") + "<enter>",
+    "difference": leader("gd"),
     "flip": leader("ww"),
-    "flipped": leader("ww"),
-    "slip": leader("ww"),
-    "flick": leader("ww"),
-    "viewing": leader("bv"),
+    "frame": leader("wo"),
     "helm": leader(":"),
     "home": leader(":"),
-    "compile": leader("cC") + "<enter>",
+    "persist": leader("fs"),
+    "search": leader("ss"),
     "status": leader("gs"),
-    "difference": leader("gd"),
-    "committing": leader("gh")
+    "switch": leader("bb"),
+    "viewing": leader("bv")
 }

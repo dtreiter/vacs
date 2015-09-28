@@ -1,20 +1,18 @@
 from functions import *
 
 grammar = {
-    "mode": "mode",
-    "fax": "vacs",
-    "backs": "vacs",
-    "functions": "functions",
-    "symbol": "symbol",
-    "grammar": "grammar",
     "compiler": "compiler",
-    "parser": "parser",
-    "lexor": "lexer",
-    "flexor": "lexer",
-    "general": "general",
     "config": "config",
+    "directory": "directory",
+    "functions": "functions",
+    "general": "general",
+    "grammar": "grammar",
     "interpreter": "interpreter",
+    "lexer": "lexer",
+    "mode": "mode",
+    "parser": "parser",
+    "symbol": "symbol",
     "token": "token",
     "utilities": "utilities",
-    "directory": "directory"
+    "vacs": "vacs"
 }

@@ -1,26 +1,28 @@
 from functions import *
 
-hippie_expand = "<alt>/"
+def snippet(key):
+    return key + "<alt>/"
+
 
 grammar = {
-    "python": "python ",
-    "pie": "py",
-    "self": "self",
-    "return": "return ",
-    "from": "from ",
-    "print": "print()<left>",
-    "range": "range()<left>",
-    "links": "len()<left>",
-    "length": "len()<left>",
     "comment": "# ",
-    "import": "import ",
-    "hippie": hippie_expand,
-    "function": "f" + hippie_expand,
-    "condition": "if" + hippie_expand,
+    "document": "<quote><quote><quote><enter><enter><quote><quote><quote><up>",
     "else": "else:<enter>",
-    "value": "d<quote>" + hippie_expand,
-    "loop": "frn" + hippie_expand,
-    "luke": "frn" + hippie_expand,
+    "from": "from ",
+    "hippie": "<alt>/",
+    "import": "import ",
+    "length": "len()<left>",
+    "pie": "py",
+    "print": "print()<left>",
+    "python": "python ",
+    "range": "range()<left>",
+    "return": "return ",
+    "self": "self",
+
+    "condition": snippet("if"),
+    "function": snippet("f"),
+    "loop": snippet("frn"),
+    "value": snippet("d<quote>"),
 
     "magic": magic_case
 }
