@@ -72,6 +72,9 @@ class CoreInterpreter():
                     try:
                         # Run the rest of the text through the function.
                         text = " ".join(words[index + 1:])
+                        if text == "":
+                            utilities.log("ERROR: No text provided for grammar function.")
+                            break
                         result = self.mode_grammar_compiled[word](text)
                         keys = config.Parser.parse_string(result)
                         self.send_keystrokes(keys)
