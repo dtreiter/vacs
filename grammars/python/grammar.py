@@ -5,13 +5,14 @@ def snippet(key):
 
 
 grammar = {
+    "and": " and ",
     "comment": "# ",
     "document": "<quote><quote><quote><enter><enter><quote><quote><quote><up>",
-    "else": "else:<enter>",
     "from": "from ",
     "hippie": "<alt>/",
     "import": "import ",
     "length": "len()<left>",
+    "or": " or ",
     "pie": "py",
     "print": "print()<left>",
     "python": "python ",
@@ -19,10 +20,12 @@ grammar = {
     "return": "return ",
     "self": "self",
 
-    "condition": snippet("if"),
-    "function": snippet("f"),
-    "loop": snippet("frn"),
-    "value": snippet("d<quote>"),
+    "also": snippet("vcei"),
+    "condition": snippet("vcif"),
+    "else": snippet("vces"),
+    "function": snippet("vcfn"),
+    "loop": snippet("vcfr"),
+    "value": snippet("vcdv"),
 
     "magic": magic_case
 }

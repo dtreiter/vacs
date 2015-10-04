@@ -201,6 +201,7 @@ grammar = {
     "increment": " += ",
     "clap": ":",
     "minus": " - ",
+    "modulo": " % ",
 
     "lower": lowercase,
     "upper": uppercase,

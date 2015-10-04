@@ -1,9 +1,11 @@
 from functions import *
 
 grammar = {
-  "addition": "add ",
-  "commit": "commit ",
-  "get": "git ",
-  "message": "-m ''<left>",
-  "slap": "<up><enter>"
+    "addition": "add ",
+    "change": "cd ",
+    "commit": "commit ",
+    "contents": "ls<enter>",
+    "create": "mkdir ",
+    "get": "git ",
+    "message": "-m ''<left>"
 }
