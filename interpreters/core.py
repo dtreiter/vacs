@@ -99,6 +99,6 @@ class CoreInterpreter():
         utilities.log("Loading grammars...")
         grammars = self.load_grammars("grammar")
         compiled_grammars = self.load_grammars("grammar_compiled")
-        self.set_mode("python", grammars, compiled_grammars)
+        self.set_mode(config.DEFAULT_MODE, grammars, compiled_grammars)
         utilities.log("Loading complete.")
         self.read_input()
