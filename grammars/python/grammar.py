@@ -7,10 +7,10 @@ def snippet(key):
 grammar = {
     "and": " and ",
     "comment": "# ",
-    "document": "<quote><quote><quote><enter><enter><quote><quote><quote><up>",
     "from": "from ",
     "hippie": "<alt>/",
     "import": "import ",
+    "initialize": "__init__",
     "length": "len()<left>",
     "or": " or ",
     "pie": "py",
@@ -22,6 +22,7 @@ grammar = {
 
     "also": snippet("vcei"),
     "condition": snippet("vcif"),
+    "document": snippet("vcds"),
     "else": snippet("vces"),
     "function": snippet("vcfn"),
     "loop": snippet("vcfr"),

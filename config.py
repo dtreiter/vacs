@@ -1,4 +1,4 @@
 VERBOSE = False
-DEFAULT_MODE = "python"
+DEFAULT_MODE = "javascript"
 Parser = None
 Interpreter = None

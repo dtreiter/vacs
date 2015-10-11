@@ -4,6 +4,7 @@ grammar = {
     "compiler": "compiler",
     "config": "config",
     "directory": "directory",
+    "filter": "filter",
     "functions": "functions",
     "general": "general",
     "grammar": "grammar",

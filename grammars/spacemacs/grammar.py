@@ -5,9 +5,11 @@ def leader(keys):
 
 
 grammar = {
+    "evaluate": "<alt>:",
     "jerk": "<esc>A",
     "reload": ":e!",
     "shell": "shell",
+    "snippet": "snippet",
     "undo": "<ctrl>_",
 
     "committing": leader("gh"),
@@ -19,6 +21,7 @@ grammar = {
     "home": leader(":"),
     "open": leader("ff"),
     "persist": leader("fs"),
+    "reinitialize": leader("yi"),
     "search": leader("ss"),
     "slap": leader("yn"),
     "status": leader("gs"),

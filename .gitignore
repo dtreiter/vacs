@@ -1,3 +1,4 @@
 .projectile
 *.pyc
 *_compiled.py
+*yas-compiled-snippets.el
