@@ -52,7 +52,12 @@ class CoreInterpreter():
         tty.setraw(fileno)
         while 1:
             data = os.read(0, 1024).lower()
-            words = data.split(" ")
+            if (data == " "):
+                # This was added specifically to accommodate typing alongside
+                # speaking. This lets the user map the spacebar key.
+                words = [" "]
+            else:
+                words = data.split(" ")
             self.process_words(words)
 
     def process_words(self, words):
@@ -87,7 +92,10 @@ class CoreInterpreter():
                 else:
                     keys = self.mode_grammar_compiled[word]
                     self.send_keystrokes(keys)
-                    utilities.log(word + " -> " + self.mode_grammar[word])
+                    try:
+                        utilities.log(word + " -> " + self.mode_grammar[word])
+                    except:
+                        utilities.log("UNPRINTABLE GRAMMAR RULE", verbose=True)
             else:
                 utilities.log("Unrecognized rule: " + word)
                 break

@@ -11,6 +11,8 @@ SPECIALS = [
     "right",
     "quote",
     "backslash",
+    "pgdn",
+    "pgup",
     "lbracket",
     "rbracket"
 ]

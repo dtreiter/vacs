@@ -92,9 +92,11 @@ SCANCODES = {
     "f1": 59,
     "f2": 60,
     "up": 72,
+    "pgup": 73,
     "left": 75,
     "right": 77,
-    "down": 80
+    "down": 80,
+    "pgdn": 81
 }
 
 class VboxParser(BaseParser):

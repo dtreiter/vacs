@@ -5,6 +5,8 @@ SPECIAL_CHARACTERS = {
     "enter": "Enter",
     "bspace": "Bspace",
     "tab": "Tab",
+    "pgup": "PgUp",
+    "pgdn": "PgDn",
     "up": "Up",
     "down": "Down",
     "left": "Left",
