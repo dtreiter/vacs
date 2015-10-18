@@ -5,11 +5,17 @@ def snippet(key):
 
 grammar = {
     "another": "<esc>A;<enter>",
-    "finish": "<esc>A;",
+    "canvas": "canvas",
+    "console": "<ctrl>J",
+    "finish": "<esc>A;<esc>",
     "javascript": ".js",
     "js": "js",
+    "log": "console.log();<left><left>",
+    "new": "new ",
     "this": "this",
+    "variable": "var ",
 
     "function": snippet("vcfn"),
     "method": snippet("vcmt"),
+    "object": snippet("vcob")
 }

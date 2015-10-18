@@ -12,6 +12,7 @@ grammar = {
     "import": "import ",
     "initialize": "__init__",
     "length": "len()<left>",
+    "magic": "____<left><left>",
     "or": " or ",
     "pie": "py",
     "print": "print()<left>",
@@ -27,6 +28,4 @@ grammar = {
     "function": snippet("vcfn"),
     "loop": snippet("vcfr"),
     "value": snippet("vcdv"),
-
-    "magic": magic_case
 }
