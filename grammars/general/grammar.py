@@ -101,15 +101,6 @@ grammar = {
     "right": "<right>",
     "left": "<left>",
 
-    # StumpWM
-    "window": "<ctrl>t'",
-    "applications": "<ctrl>t<quote>",
-    "refresh": "<ctrl>t'firefox<enter><ctrl>r",
-    "title": "<ctrl>t;title<enter>",
-    "firefox": "<ctrl>t'firefox<enter>",
-    "terminal": "<ctrl>t'terminal<enter>",
-    "editor": "<ctrl>t'emacs<enter>",
-
     # Phonetic alphabet that using names
     "albert" : "a",
     "bill" : "b",

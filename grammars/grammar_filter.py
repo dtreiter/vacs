@@ -36,6 +36,7 @@ grammar_filter = {
     "find-nancy": ["financing"],
     "finish": ["finished", "finnish"],
     "flip": ["lip", "flipped", "slip", "flick", "foot", "clip"],
+    "frame": ["friend"],
     "flower": ["flour"],
     "gary": ["carry", "kerry", "garry", "gerry"],
     "get": ["gets"],
