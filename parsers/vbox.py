@@ -8,7 +8,7 @@ SHIFT_SYMBOLS = {
     ":": ";",
     "quote": "'",
     "~": "`",
-    "|": "\\",
+    "|": "backslash",
     "lbracket": ",",
     "rbracket": ".",
     "?": "/",
