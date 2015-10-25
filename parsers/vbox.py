@@ -26,12 +26,6 @@ SHIFT_SYMBOLS = {
     ")": "0"
 }
 
-MODIFIER_SCANCODES = {
-    "ctrl": "29",
-    "alt": "56",
-    "shift": "42"
-}
-
 # Mapping of keys to their corresponding decimal scan code. Note that only the
 # key down scan codes are stored - the key up scan code is formed by adding 128
 # to the original scan code.
@@ -144,7 +138,7 @@ class VboxParser(BaseParser):
         """
         keydowns = []
         for modifier in token["modifiers"]:
-            keydowns.append(cls.keydown(MODIFIER_SCANCODES[modifier]))
+            keydowns.append(cls.keydown(SCANCODES[modifier]))
 
         return keydowns
 
@@ -157,7 +151,7 @@ class VboxParser(BaseParser):
         """
         keyups = []
         for modifier in token["modifiers"]:
-            keyups.append(cls.keyup(MODIFIER_SCANCODES[modifier]))
+            keyups.append(cls.keyup(SCANCODES[modifier]))
 
         return keyups
 
@@ -184,7 +178,7 @@ class VboxParser(BaseParser):
         VirtualBox expects each scan code in a 2 digit hex format. Since we
         store it in decimal, we convert to hex here.
         """
-        return format(int(code), "02x")
+        return format(code, "02x")
 
     @classmethod
     def keyup(cls, code):
@@ -192,4 +186,4 @@ class VboxParser(BaseParser):
         Given a scan code, add 128 to it to form the key up scan code. Then
         convert it to the two digit hex format that VirtualBox expects.
         """
-        return format(int(code) + 128, "02x")
+        return format(code + 128, "02x")
