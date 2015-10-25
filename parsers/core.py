@@ -1,4 +1,14 @@
 class BaseParser():
+    """
+    This base class implements most of the code required to parse a
+    tokenized_grammar. Note that this class is not meant to be instantiated -
+    all methods are class methods.
+
+    Subclasses will need to implement:
+        parse_token - Class method that returns a string in the form the
+                      interpreter expects to send the connection.
+    """
+
     @classmethod
     def parse(cls, tokenized_grammar):
         """
@@ -38,16 +48,6 @@ class BaseParser():
         Given a symbol and a list of modifiers, return a string representing
         the parsed token.
         If the symbol is a function reference, return the function reference.
-        """
-        raise NotImplementedError()
-
-    @classmethod
-    def parse_modifiers(cls, modifiers):
-        """
-        This is just a stub. Subclasses should implement the following behavior:
-
-        Given a list of modifiers parse them into the form the interpreter needs.
-        Returns the parsed modifiers as a string.
         """
         raise NotImplementedError()
 

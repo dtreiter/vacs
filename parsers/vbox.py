@@ -1,5 +1,7 @@
 from core import BaseParser
 
+# Mapping of symbols which require the shift key to the non-shift key they are
+# physically located on.
 SHIFT_SYMBOLS = {
     "_": "-",
     "+": "=",
@@ -30,6 +32,9 @@ MODIFIER_SCANCODES = {
     "shift": "42"
 }
 
+# Mapping of keys to their corresponding decimal scan code. Note that only the
+# key down scan codes are stored - the key up scan code is formed by adding 128
+# to the original scan code.
 SCANCODES = {
     "esc": 1,
     "1": 2,
@@ -102,6 +107,11 @@ SCANCODES = {
 class VboxParser(BaseParser):
     @classmethod
     def parse_token(cls, token):
+        """
+        Convert a symbol which requires the shift key to instead have the shift
+        key modifier. Then return all key up and key down scan codes for the
+        token.
+        """
         if callable(token["symbol"]):
             return token["symbol"]
 
@@ -127,6 +137,11 @@ class VboxParser(BaseParser):
 
     @classmethod
     def get_modifier_keydowns(cls, token):
+        """
+        Given a token, return a list containing the keyboard scan codes
+        corresponding to the key down events for each modifier present in the
+        token.
+        """
         keydowns = []
         for modifier in token["modifiers"]:
             keydowns.append(cls.keydown(MODIFIER_SCANCODES[modifier]))
@@ -135,6 +150,11 @@ class VboxParser(BaseParser):
 
     @classmethod
     def get_modifier_keyups(cls, token):
+        """
+        Given a token, return a list containing the keyboard scan codes
+        corresponding to the key up events for each modifier present in the
+        token.
+        """
         keyups = []
         for modifier in token["modifiers"]:
             keyups.append(cls.keyup(MODIFIER_SCANCODES[modifier]))
@@ -143,6 +163,10 @@ class VboxParser(BaseParser):
 
     @classmethod
     def get_scancodes(cls, token):
+        """
+        Given a token, return a space separated string containing the keyboard
+        scan codes corresponding to the token.
+        """
         if token["symbol"] in SCANCODES:
             code = SCANCODES[token["symbol"]]
             scancodes = []
@@ -156,8 +180,16 @@ class VboxParser(BaseParser):
 
     @classmethod
     def keydown(cls, code):
+        """
+        VirtualBox expects each scan code in a 2 digit hex format. Since we
+        store it in decimal, we convert to hex here.
+        """
         return format(int(code), "02x")
 
     @classmethod
     def keyup(cls, code):
+        """
+        Given a scan code, add 128 to it to form the key up scan code. Then
+        convert it to the two digit hex format that VirtualBox expects.
+        """
         return format(int(code) + 128, "02x")
