@@ -30,24 +30,25 @@ class BaseParser():
         If the list of tokens is a function reference, return the function
         reference.
         """
-        parsed = []
-        for token in tokens:
-            parsed.append(cls.parse_token(token))
-
-        if callable(parsed[0]):
-            return parsed[0]
+        if tokens[0]["type"] == "function":
+            # The token is a function reference.
+            return tokens[0]["function"]
         else:
+            # The tokens represents a string.
+            parsed = []
+            for token in tokens:
+                parsed.append(cls.parse_symbol(token))
+
             # Convert list to string.
             return " ".join(parsed)
 
     @classmethod
-    def parse_token(cls, token):
+    def parse_symbol(cls, token):
         """
         This is just a stub. Subclasses should implement the following behavior:
 
-        Given a symbol and a list of modifiers, return a string representing
-        the parsed token.
-        If the symbol is a function reference, return the function reference.
+        Given a token containing a symbol and a list of modifiers, return a
+        string representing the parsed token.
         """
         raise NotImplementedError()
 

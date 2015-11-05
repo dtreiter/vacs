@@ -100,15 +100,12 @@ SCANCODES = {
 
 class VboxParser(BaseParser):
     @classmethod
-    def parse_token(cls, token):
+    def parse_symbol(cls, token):
         """
         Convert a symbol which requires the shift key to instead have the shift
         key modifier. Then return all key up and key down scan codes for the
         token.
         """
-        if callable(token["symbol"]):
-            return token["symbol"]
-
         cls.normalize_shift(token)
         scancodes = cls.get_scancodes(token)
         return scancodes

@@ -8,14 +8,17 @@ class TestLexer(unittest.TestCase):
             "key": "test",
             "tokens": [
                 {
+                    "type": "symbol",
                     "modifiers": [],
                     "symbol": "a"
                 },
                 {
+                    "type": "symbol",
                     "modifiers": [],
                     "symbol": "b"
                 },
                 {
+                    "type": "symbol",
                     "modifiers": [],
                     "symbol": "c"
                 }
@@ -24,16 +27,18 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_modifiers(self):
-        result = lexer.lex({"test": "<ctrl>a<ctrl><shift>b"})
+        result = lexer.lex({"test": "<ctrl>a<alt>b"})
         expected = [{
             "key": "test",
             "tokens": [
                 {
+                    "type": "symbol",
                     "modifiers": ["ctrl"],
                     "symbol": "a"
                 },
                 {
-                    "modifiers": ["ctrl", "shift"],
+                    "type": "symbol",
+                    "modifiers": ["alt"],
                     "symbol": "b"
                 }
             ]
@@ -46,10 +51,12 @@ class TestLexer(unittest.TestCase):
             "key": "test",
             "tokens": [
                 {
+                    "type": "symbol",
                     "modifiers": [],
                     "symbol": "esc"
                 },
                 {
+                    "type": "symbol",
                     "modifiers": ["ctrl"],
                     "symbol": "tab"
                 }

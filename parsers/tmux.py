@@ -35,15 +35,12 @@ MODIFIERS = {
 
 class TmuxParser(BaseParser):
     @classmethod
-    def parse_token(cls, token):
+    def parse_symbol(cls, token):
         """
         Given a symbol and a list of modifiers, return a string representing
         the parsed token.
-        If the symbol is a function reference, return the function reference.
         """
-        if callable(token["symbol"]):
-            return token["symbol"]
-        elif token["symbol"] in SPECIAL_CHARACTERS:
+        if token["symbol"] in SPECIAL_CHARACTERS:
             token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 
         parsed_modifiers = cls.parse_modifiers(token["modifiers"])

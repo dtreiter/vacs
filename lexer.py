@@ -28,8 +28,8 @@ def lex(grammar):
     for entry in grammar:
         if callable(grammar[entry]):
             tokens = [{
-                "modifiers": [],
-                "symbol": grammar[entry]
+                "type": "function",
+                "function": grammar[entry]
             }]
         else:
             characters = split_characters(grammar[entry])
@@ -76,7 +76,10 @@ def tokenize(characters):
     tokens = []
     iter_characters = iter(characters)
     for character in iter_characters:
-        token = {"modifiers": []}
+        token = {
+            "type": "symbol",
+            "modifiers": []
+        }
         while is_modifier(character):
             modifier = get_tag(character)
             token["modifiers"].append(modifier)
