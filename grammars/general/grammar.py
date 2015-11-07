@@ -202,6 +202,8 @@ grammar = {
     "minus": " - ",
     "modulo": " % ",
     "entry": ", ",
+    "less": " <lbracket> ",
+    "greater": " <rbracket> ",
 
     "lower": lowercase,
     "upper": uppercase,
@@ -209,7 +211,7 @@ grammar = {
     "capital": capitalcase,
     "spine": spinecase,
     "say": titlecase,
-    "method": dotcase,
+    "property": dotcase,
     "joint": nospaces,
     "join": nospaces,
     "spell": nospaces,

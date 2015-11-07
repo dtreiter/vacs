@@ -12,6 +12,9 @@ grammar = {
     "js": "js",
     "log": "console.log();<left><left>",
     "new": "new ",
+    "node": "node ",
+    "package": "npm ",
+    "regular": "//<left>",
     "this": "this",
     "variable": "var ",
 

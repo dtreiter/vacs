@@ -12,6 +12,8 @@ def command(name):
 grammar = {
     "window": prefix("'"),
     "applications": prefix("<quote>"),
+    "destroy": prefix("k"),
+    "split": prefix("S"),
     "title": command("title"),
     "refresh": window("firefox") + "<ctrl>r",
     "firefox": window("firefox"),
