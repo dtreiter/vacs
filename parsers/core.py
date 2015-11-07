@@ -60,6 +60,7 @@ class BaseParser():
         tokens = []
         for letter in list(string):
             tokens.append({
+                "type": "symbol",
                 "modifiers": [],
                 "symbol": letter
             })
