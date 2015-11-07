@@ -6,13 +6,19 @@ import importlib
 import config
 import modes
 import utilities
-from grammars.filter_compiled import grammar_filter
 
 class CoreInterpreter():
     def __init__(self):
         # Holds all grammar rules that the interpreter will use.
         self.mode_grammar = {}
         self.mode_grammar_compiled = {}
+        self.grammar_filter = {}
+
+    def load_grammar_filter(self):
+        """
+        Loads the global grammar_filter used for commonly mistaken words.
+        """
+        return importlib.import_module("grammars.filter_compiled").grammar_filter
 
     def load_grammars(self, filename):
         """
@@ -68,9 +74,9 @@ class CoreInterpreter():
         """
         for index, word in enumerate(words):
             # Correct the word if it is in the grammar_filter.
-            if word in grammar_filter:
-                utilities.log(word + " => " + grammar_filter[word], verbose=True)
-                word = grammar_filter[word]
+            if word in self.grammar_filter:
+                utilities.log(word + " => " + self.grammar_filter[word], verbose=True)
+                word = self.grammar_filter[word]
 
             if word in self.mode_grammar_compiled:
                 if callable(self.mode_grammar_compiled[word]):
@@ -105,6 +111,7 @@ class CoreInterpreter():
 
     def interpret(self):
         utilities.log("Loading grammars...")
+        self.grammar_filter = self.load_grammar_filter()
         grammars = self.load_grammars("grammar")
         compiled_grammars = self.load_grammars("grammar_compiled")
         self.set_mode(config.DEFAULT_MODE, grammars, compiled_grammars)
