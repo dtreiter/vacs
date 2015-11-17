@@ -1,21 +1,37 @@
 from functions import *
 
+import config
+
+def escape(keys):
+    if config.CONNECTION_TYPE == "tmux":
+        # When using tmux, keypresses can occur so quickly that Emacs
+        # experiences problems. So instead we rely on spacemacs' evil-escape key
+        # sequence.
+        return "<f10>" + keys
+    else:
+        return "<esc>" + keys
+
 def leader(keys):
     return "<alt>M" + keys
 
 
 grammar = {
+    "above": escape("O"),
     "alter": "ciw",
+    "below": escape("o"),
+    "beginning": "gg",
+    "bottom": "G",
     "center": "zz",
+    "copy": "yy",
     "evaluate": "<alt>:",
-    "store": "viw" + leader("yr"),
-    "jerk": "<esc>A",
-    "above": "<esc>O",
-    "below": "<esc>o",
+    "jerk": escape("A"),
+    "okay": "<esc>",
+    "okay": escape(""),
     "inside": "vi",
-    "trim": "<esc>$x",
+    "trim": escape("$x"),
     "reload": ":e!",
     "reformat": "<alt>q",
+    "repeat": "@q",
     "remove": "dd",
     "scratch": "<ctrl>x<bspace>",
     "shell": "shell",
@@ -25,6 +41,7 @@ grammar = {
     "column": leader("wv"),
     "committing": leader("gh"),
     "compile": leader("cC") + "<enter>",
+    "configuration": leader("fed"),
     "difference": leader("gd"),
     "flip": leader("ww"),
     "frame": leader("wo"),
@@ -38,6 +55,7 @@ grammar = {
     "register": leader("yr"),
     "reinitialize": leader("yi"),
     "search": leader("ss"),
+    "store": "viw" + leader("yr"),
     "next": leader("yn"),
     "rotate": leader("wR"),
     "status": leader("gs"),

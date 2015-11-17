@@ -4,6 +4,7 @@ SPECIAL_CHARACTERS = {
     "esc": "Escape",
     "enter": "Enter",
     "bspace": "Bspace",
+    "f10": "F10",
     "tab": "Tab",
     "pgup": "PgUp",
     "pgdn": "PgDn",

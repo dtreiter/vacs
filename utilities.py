@@ -8,9 +8,11 @@ def set_connection(connection_type):
     Imports the parser and interpreter corresponding to connection_type.
     """
     if connection_type == "vbox":
+        config.CONNECTION_TYPE = "vbox"
         config.Parser = import_attribute("parsers.vbox", "VboxParser")
         config.Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
     elif connection_type == "tmux":
+        config.CONNECTION_TYPE = "tmux"
         config.Parser = import_attribute("parsers.tmux", "TmuxParser")
         config.Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
 

@@ -2,6 +2,7 @@ import re
 
 SPECIALS = [
     "esc",
+    "f10",
     "tab",
     "bspace",
     "enter",
