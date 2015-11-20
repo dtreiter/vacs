@@ -53,7 +53,7 @@ grammar = {
     "insert": "<ctrl>r",
     "extend": "<ctrl>x",
     "escape": "<esc>",
-    "backspace": "<bspace>",
+    "backspace": "<backspace>",
     "tab": "<tab>",
     "turn": "<tab>",
     "enter": "<enter>",

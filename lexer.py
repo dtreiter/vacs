@@ -4,7 +4,7 @@ SPECIALS = [
     "esc",
     "f10",
     "tab",
-    "bspace",
+    "backspace",
     "enter",
     "up",
     "down",

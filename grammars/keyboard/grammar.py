@@ -2,7 +2,7 @@ from functions import *
 
 grammar = {
     " ": " ",
-    "\\x7f": "<bspace>",
+    "\\x7f": "<backspace>",
     "\\x0d": "<enter>",
     "\\x1b": "<esc>",
     "\\x09": "<tab>",

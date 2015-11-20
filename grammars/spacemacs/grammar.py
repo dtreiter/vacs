@@ -36,7 +36,7 @@ grammar = {
     "replace": ":s/",
     "reselect": "gv",
     "remove": "dd",
-    "scratch": "<ctrl>x<bspace>",
+    "scratch": "<ctrl>x<backspace>",
     "shell": "shell",
     "snippet": "snippet",
     "undo": "<ctrl>_",
