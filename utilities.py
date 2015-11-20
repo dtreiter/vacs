@@ -52,13 +52,13 @@ def dump_grammar(grammar, output_file):
     dump += "\n}"
     output_file.write(dump)
 
-def dump_filter(grammar_filter, output_file):
+def dump_aliases(aliases, output_file):
     """
-    Writes a given grammar_filter to output_file as a human readable dictionary.
+    Writes a given alias mapping to output_file as a human readable dictionary.
     """
-    dump = "grammar_filter = {\n"
-    for key in grammar_filter:
-        dump += "    \"" + key + "\": \"" + grammar_filter[key] + "\",\n"
+    dump = "aliases = {\n"
+    for key in aliases:
+        dump += "    \"" + key + "\": \"" + aliases[key] + "\",\n"
 
     # Remove trailing comma
     dump = dump[:-2]

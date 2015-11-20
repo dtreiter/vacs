@@ -28,7 +28,7 @@ def main():
     if arguments.create_grammar:
         utilities.create_grammar(arguments.create_grammar)
     elif arguments.compile:
-        compiler.compile_filter()
+        compiler.compile_aliases()
         compiler.compile_grammars()
     else:
         interpreter = config.Interpreter()

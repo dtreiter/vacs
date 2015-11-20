@@ -1,4 +1,4 @@
-grammar_filter = {
+aliases = {
     # NOTE: Keys containing hyphens are used to correct mistakes where multiple
     #       words get mapped to a single incorrect word. This is a work around
     #       since grammar rule keys can only be single words.
@@ -8,6 +8,7 @@ grammar_filter = {
     "a": ["hey", "pay"],
     "addition": ["edition"],
     "albert": ["alpert", "alberts", "albert's"],
+    "alter": ["altar"],
     "alvin": ["album"],
     "append": ["uphend"],
     "array": ["parade", "hooray", "blu-ray", "beret", "rate"],
@@ -75,6 +76,7 @@ grammar_filter = {
     "quote": ["quotes"],
     "r": ["are"],
     "remove": ["removed"],
+    "replace": ["replaced"],
     "right": ["wright", "bright", "write", "writes", "rights", "rite"],
     "say": ["saying"],
     "scan": ["scam"],
@@ -83,6 +85,7 @@ grammar_filter = {
     "slap": ["slapped", "slop", "slot", "slut", "slept"],
     "smack": ["snack", "mac"],
     "smudge": ["smudged", "spuds", "smutz"],
+    "snake": ["sneak"],
     "spell": ["spelled", "spelt"],
     "steven": ["stephen"],
     "string": ["strain", "strained", "stream", "strength", "street"],
@@ -93,7 +96,7 @@ grammar_filter = {
     "u": ["you"],
     "ultimate": ["alternate"],
     "undo": ["undue", "under"],
-    "vacs": ["fax", "backs"],
+    "vacs": ["fax", "backs", "vax"],
     "valerie": ["valery"],
     "viewing": ["feeling"],
     "visible": ["visual"],

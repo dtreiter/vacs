@@ -1,6 +1,8 @@
 from functions import *
 
 grammar = {
+    "alias": "alias",
+    "aliases": "aliases",
     "compiler": "compiler",
     "config": "config",
     "directory": "directory",
