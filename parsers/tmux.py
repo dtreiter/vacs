@@ -1,4 +1,4 @@
-from core import BaseParser
+from base import BaseParser
 
 SPECIAL_CHARACTERS = {
     "esc": "Escape",

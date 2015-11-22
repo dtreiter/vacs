@@ -1,4 +1,4 @@
-from core import BaseParser
+from base import BaseParser
 
 # Mapping of symbols which require the shift key to the non-shift key they are
 # physically located on.
