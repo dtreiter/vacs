@@ -1,9 +1,9 @@
 import os
 import sys
 
-from core import CoreInterpreter
+from base import BaseInterpreter
 
-class VboxInterpreter(CoreInterpreter):
+class VboxInterpreter(BaseInterpreter):
     def send_keystrokes(self, keys):
         for scancode in keys.split(" "):
             os.system("VBoxManage controlvm SiftMri keyboardputscancode " + scancode)

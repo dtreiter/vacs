@@ -7,7 +7,7 @@ import config
 import modes
 import utilities
 
-class CoreInterpreter():
+class BaseInterpreter():
     def __init__(self):
         # Holds all grammar rules that the interpreter will use.
         self.mode_grammar = {}

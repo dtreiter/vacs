@@ -1,8 +1,8 @@
 import os
 import sys
 
-from core import CoreInterpreter
+from base import BaseInterpreter
 
-class TmuxInterpreter(CoreInterpreter):
+class TmuxInterpreter(BaseInterpreter):
     def send_keystrokes(self, keys):
         os.system("tmux send-keys " + keys)
