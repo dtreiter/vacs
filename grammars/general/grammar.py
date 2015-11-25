@@ -94,7 +94,7 @@ grammar = {
     "z": "z",
 
     "find": "f",
-    "top": "<up>",
+    "up": "<up>",
     "down": "<down>",
     "down-down": "<down><down>",
     "right": "<right>",
@@ -128,7 +128,6 @@ grammar = {
     "zipper": "z",
     "paste": "p",
     "the": "v",
-    "visible": "V",
 
     # Capital letters
     "alvin": "A",

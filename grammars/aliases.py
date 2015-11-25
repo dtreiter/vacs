@@ -52,6 +52,7 @@ aliases = {
     "initialize": ["initialized"],
     "jagger": ["jagar", "jager", "jagr"],
     "jeffrey": ["jefferey"],
+    "jump": ["chump", "chomp"],
     "kill": ["till", "chill", "killed", "chilled", "tilled"],
     "length": ["links"],
     "less": ["bless", "les"],
@@ -99,7 +100,7 @@ aliases = {
     "vacs": ["fax", "backs", "vax"],
     "valerie": ["valery"],
     "viewing": ["feeling"],
-    "visible": ["visual"],
+    "visual": ["visible"],
     "y": ["why", "wife"],
     "yy": ["waiwai", "huewai"],
     "zebra": ["sibra", "seabrook"]

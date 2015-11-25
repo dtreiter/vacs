@@ -5,6 +5,7 @@ grammar = {
     "aliases": "aliases",
     "compiler": "compiler",
     "config": "config",
+    "control": "<lbracket>ctrl<rbracket>",
     "directory": "directory",
     "filter": "filter",
     "functions": "functions",
