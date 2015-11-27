@@ -16,6 +16,9 @@ def set_connection(connection_type):
         config.Parser = import_attribute("parsers.tmux", "TmuxParser")
         config.Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
 
+def set_verbose(is_verbose):
+    config.VERBOSE = is_verbose
+
 def log(string, verbose=False):
     """
     Prints the string followed by a '\r', which is necessary when the terminal is

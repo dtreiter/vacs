@@ -21,6 +21,9 @@ def main():
     argument_parser.add_argument("--compile",
                                  help="Compile all grammar files",
                                  action="store_true")
+    argument_parser.add_argument("--verbose",
+                                 help="Enable verbose logging",
+                                 action="store_true")
     arguments = argument_parser.parse_args()
 
     utilities.set_connection(arguments.connection)
@@ -31,6 +34,8 @@ def main():
         compiler.compile_aliases()
         compiler.compile_grammars()
     else:
+        if arguments.verbose:
+            utilities.set_verbose(True)
         interpreter = config.Interpreter()
         interpreter.interpret()
 
