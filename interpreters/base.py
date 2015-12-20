@@ -5,6 +5,7 @@ import importlib
 import re
 
 import config
+import lexer # TODO Reorganize to remove dependency.
 import modes
 import utilities
 
@@ -65,11 +66,19 @@ class BaseInterpreter():
 
     def load_aliases(self):
         """
-        Loads the global aliases used for commonly mistaken words.
+        Compiles the grammar aliases. That is, it essentially reverses the
+        aliases dictionary. This makes it easy to look up a mistaken word as
+        one of the keys of the compiled_aliases dictionary.
         """
-        return importlib.import_module("grammars.aliases_compiled").aliases
+        aliases = utilities.import_attribute("grammars.aliases", "aliases")
+        compiled_aliases = {}
+        for key in aliases:
+            for value in aliases[key]:
+                compiled_aliases[value] = key
 
-    def load_grammars(self, filename):
+        return compiled_aliases
+
+    def load_grammars(self, parse):
         """
         Loads each compiled grammar from the subdirectories of the grammars
         directory.
@@ -77,10 +86,13 @@ class BaseInterpreter():
         grammars = {}
         directories = utilities.child_directories("grammars")
         for directory in directories:
-            utilities.log("Loading grammar: '" + directory + "'", verbose=True)
-            module = ".".join(["grammars", directory, filename])
+            module = ".".join(["grammars", directory, "grammar"])
             grammar = importlib.import_module(module)
-            grammars[directory] = grammar.grammar
+            if parse:
+                utilities.log("Parsing grammar: '" + directory + "'", verbose=True)
+                grammars[directory] = config.Parser.parse(lexer.lex(grammar.grammar))
+            elif not parse:
+                grammars[directory] = grammar.grammar
 
         return grammars
 
@@ -156,8 +168,8 @@ class BaseInterpreter():
     def interpret(self):
         utilities.log("Loading grammars...")
         self.aliases = self.load_aliases()
-        grammars = self.load_grammars("grammar")
-        compiled_grammars = self.load_grammars("grammar_compiled")
+        grammars = self.load_grammars(parse=False)
+        compiled_grammars = self.load_grammars(parse=True)
         self.set_mode(config.DEFAULT_MODE, grammars, compiled_grammars)
         utilities.log("Loading complete.")
         self.read_input()
