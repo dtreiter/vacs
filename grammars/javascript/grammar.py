@@ -16,7 +16,7 @@ grammar = {
     "package": "npm ",
     "regular": "//<left>",
     "this": "this",
-    "variable": "var ",
+    "declare": "var ",
 
     "function": snippet("vcfn"),
     "method": snippet("vcmt"),

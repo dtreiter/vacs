@@ -5,8 +5,8 @@ import config
 def escape(keys):
     if config.CONNECTION_TYPE == "tmux":
         # When using tmux, keypresses can occur so quickly that Emacs
-        # experiences problems. So instead we rely on spacemacs' evil-escape key
-        # sequence.
+        # experiences problems. So instead we rely on mapping f10 to
+        # evil-force-normal-state.
         return "<f10>" + keys
     else:
         return "<esc>" + keys
@@ -17,6 +17,8 @@ def leader(keys):
 
 grammar = {
     "above": escape("O"),
+    "after": "a",
+    "again": ";",
     "alter": "ciw",
     "below": escape("o"),
     "beginning": "gg",
@@ -25,9 +27,12 @@ grammar = {
     "center": "zz",
     "copy": "yy",
     "evaluate": "<alt>:",
+    "jam": escape("I"),
     "jerk": escape("A"),
     "jump": jump,
+    "merge": "J",
     "okay": escape(""),
+    "previous": "''",
     "inside": "vi",
     "trim": escape("$x"),
     "reload": ":e!",
@@ -40,8 +45,10 @@ grammar = {
     "scratch": "<ctrl>x<backspace>",
     "shell": "shell",
     "snippet": "snippet",
+    "surround": "s",
     "top": "zt",
     "undo": "<ctrl>_",
+    "until": "t",
     "visual": "V",
 
     "column": leader("wv"),
@@ -60,6 +67,7 @@ grammar = {
     "project": leader("/") + "<ctrl>x<backspace>",
     "register": leader("yr"),
     "reinitialize": leader("yi"),
+    "save": leader("fs"),
     "search": leader("ss"),
     "store": "viw" + leader("yr"),
     "next": leader("yn"),

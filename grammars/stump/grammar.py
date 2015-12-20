@@ -18,5 +18,6 @@ grammar = {
     "refresh": window("firefox") + "<ctrl>r",
     "firefox": window("firefox"),
     "terminal": window("terminal"),
+    "address": "<ctrl>l",
     "editor": window("emacs")
 }
