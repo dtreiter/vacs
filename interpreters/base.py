@@ -2,10 +2,59 @@ import os
 import sys
 import tty
 import importlib
+import re
 
 import config
 import modes
 import utilities
+
+class WordBuffer():
+    """
+    This class implements an iterator for parsing a phrase which may contain
+    punctuation. It's used to return each word separate from its punctuation for
+    plain grammar rules using `next`, but leave the punctuation unaltered for
+    grammar functions using `get_all`.
+    """
+
+    def __init__(self, words):
+        if (words == " "):
+            # This exists specifically to accommodate typing alongside
+            # speaking. This lets the user map the spacebar key.
+            self.words = [" "]
+        else:
+            self.words = words.split(" ")
+            # Remove any empty string words. This can happen when the phrase
+            # begins with the space. The leading space will simply be ignored.
+            self.words = [word for word in self.words if word]
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        """
+        Returns each word or punctuation mark individually.
+        """
+        if len(self.words) == 0:
+            raise StopIteration()
+        word = self.words.pop(0)
+        if re.match("[,.:;\-_/\"]$", word):
+            return word
+        else:
+            split_words = re.split("([,.:;\-_/\"])", word)
+            # Remove any empty string words. This can happen when the word which
+            # gets split consists of only punctuation.
+            split_words = [word for word in split_words if word]
+            self.words = split_words[1:] + self.words
+            return split_words[0]
+
+    def get_all(self):
+        """
+        Returns the rest of the words without breaking them apart by
+        punctuation.
+        """
+        all_words = " ".join(self.words)
+        self.words = []
+        return all_words
 
 class BaseInterpreter():
     def __init__(self):
@@ -57,22 +106,17 @@ class BaseInterpreter():
         fileno = sys.stdin.fileno()
         tty.setraw(fileno)
         while 1:
-            data = os.read(0, 1024).lower()
-            if (data == " "):
-                # This was added specifically to accommodate typing alongside
-                # speaking. This lets the user map the spacebar key.
-                words = [" "]
-            else:
-                words = data.split(" ")
-            self.process_words(words)
+            text = os.read(0, 1024).lower()
+            self.process_text(text)
 
-    def process_words(self, words):
+    def process_text(self, text):
         """
         Loops over each word, stopping if a word is not in mode_grammar. If the
         rule's value is a function, call the function with the rest of the
         words. Otherwise send the rule's value.
         """
-        for index, word in enumerate(words):
+        words = WordBuffer(text)
+        for word in words:
             # Correct the word if it is in the aliases.
             if word in self.aliases:
                 utilities.log(word + " => " + self.aliases[word], verbose=True)
@@ -82,11 +126,11 @@ class BaseInterpreter():
                 if callable(self.mode_grammar_compiled[word]):
                     try:
                         # Run the rest of the text through the function.
-                        text = " ".join(words[index + 1:])
-                        if text == "":
+                        rest = words.get_all()
+                        if rest == "":
                             utilities.log("ERROR: No text provided for grammar function.")
                             break
-                        result = self.mode_grammar_compiled[word](text)
+                        result = self.mode_grammar_compiled[word](rest)
                         keys = config.Parser.parse_string(result)
                         self.send_keystrokes(keys)
                         utilities.log(word + " (FUNCTION) -> " + result)
