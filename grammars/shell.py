@@ -1,5 +1,3 @@
-from functions import *
-
 grammar = {
     "addition": "add ",
     "background": " &",

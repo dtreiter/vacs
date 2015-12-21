@@ -1,5 +1,3 @@
-from functions import *
-
 grammar = {
     " ": " ",
     "\x7f": "<backspace>",

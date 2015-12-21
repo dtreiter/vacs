@@ -84,15 +84,15 @@ class BaseInterpreter():
         directory.
         """
         grammars = {}
-        directories = utilities.child_directories("grammars")
-        for directory in directories:
-            module = ".".join(["grammars", directory, "grammar"])
+        grammar_names = utilities.get_grammar_names()
+        for grammar_name in grammar_names:
+            module = ".".join(["grammars", grammar_name])
             grammar = importlib.import_module(module)
             if parse:
-                utilities.log("Parsing grammar: '" + directory + "'", verbose=True)
-                grammars[directory] = config.Parser.parse(lexer.lex(grammar.grammar))
+                utilities.log("Parsing grammar: '" + grammar_name + "'", verbose=True)
+                grammars[grammar_name] = config.Parser.parse(lexer.lex(grammar.grammar))
             elif not parse:
-                grammars[directory] = grammar.grammar
+                grammars[grammar_name] = grammar.grammar
 
         return grammars
 

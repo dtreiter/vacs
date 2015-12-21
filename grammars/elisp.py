@@ -1,5 +1,3 @@
-from functions import *
-
 def snippet(key):
     return key + "<alt>/"
 

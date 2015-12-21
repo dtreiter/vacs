@@ -1,5 +1,3 @@
-from functions import *
-
 def prefix(keys):
     return "<ctrl>t" + keys
 

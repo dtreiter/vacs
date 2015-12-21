@@ -1,4 +1,5 @@
 import os
+import glob
 import importlib
 
 import config
@@ -33,9 +34,16 @@ def import_attribute(module, attribute):
     """
     return getattr(importlib.import_module(module), attribute)
 
-def child_directories(directory):
-    return [name for name in os.listdir(directory)
-            if os.path.isdir(os.path.join(directory, name))]
+def get_grammar_names():
+    """
+    Returns a list of every grammar name contained in the grammar directory.
+    """
+    modules = glob.glob("grammars/*.py")
+    module_names = [os.path.basename(f)[:-3] for f in modules if os.path.isfile(f)]
+    # Remove __init__.py and aliases from the list.
+    ignore = ["__init__", "aliases"]
+    module_names = [name for name in module_names if name not in ignore]
+    return module_names
 
 def dump_grammar(grammar, output_file):
     """

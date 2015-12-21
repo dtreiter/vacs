@@ -1,6 +1,5 @@
-from functions import *
-
 import config
+import utilities
 
 def escape(keys):
     if config.CONNECTION_TYPE == "tmux":
@@ -13,6 +12,14 @@ def escape(keys):
 
 def leader(keys):
     return "<alt>M" + keys
+
+
+def jump(text):
+    if text.isdigit():
+        return text + "gg"
+    else:
+        utilities.log("ERROR: Non-digit argument provided to jump function")
+        return ""
 
 
 grammar = {
