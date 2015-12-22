@@ -15,12 +15,6 @@ def main():
                                  default="vbox",
                                  choices=["vbox", "tmux"],
                                  action="store")
-    argument_parser.add_argument("--create-grammar",
-                                 help="Create the files necessary for a new grammar",
-                                 action="store")
-    argument_parser.add_argument("--compile",
-                                 help="Compile all grammar files",
-                                 action="store_true")
     argument_parser.add_argument("--verbose",
                                  help="Enable verbose logging",
                                  action="store_true")
@@ -28,16 +22,10 @@ def main():
 
     utilities.set_connection(arguments.connection)
 
-    if arguments.create_grammar:
-        utilities.create_grammar(arguments.create_grammar)
-    elif arguments.compile:
-        compiler.compile_aliases()
-        compiler.compile_grammars()
-    else:
-        if arguments.verbose:
-            utilities.set_verbose(True)
-        interpreter = config.Interpreter()
-        interpreter.interpret()
+    if arguments.verbose:
+        utilities.set_verbose(True)
+    interpreter = config.Interpreter()
+    interpreter.interpret()
 
 
 if __name__ == "__main__":

@@ -44,37 +44,3 @@ def get_grammar_names():
     ignore = ["__init__", "aliases"]
     module_names = [name for name in module_names if name not in ignore]
     return module_names
-
-def dump_grammar(grammar, output_file):
-    """
-    Writes a given grammar dictionary to output_file as a human readable dictionary.
-    """
-    dump = "from functions import *\n"
-    dump += "grammar = {\n"
-    for key in grammar:
-        if callable(grammar[key]):
-            value = grammar[key].__name__
-        else:
-            value = "\"" + grammar[key] + "\""
-        dump += "    \"" + key + "\": " + value + ",\n"
-
-    # Remove trailing comma
-    dump = dump[:-2]
-    dump += "\n}"
-    output_file.write(dump)
-
-def dump_aliases(aliases, output_file):
-    """
-    Writes a given alias mapping to output_file as a human readable dictionary.
-    """
-    dump = "aliases = {\n"
-    for key in aliases:
-        dump += "    \"" + key + "\": \"" + aliases[key] + "\",\n"
-
-    # Remove trailing comma
-    dump = dump[:-2]
-    dump += "\n}"
-    output_file.write(dump)
-
-def create_grammar(grammar_name):
-    pass
