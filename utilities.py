@@ -4,10 +4,11 @@ import importlib
 
 import config
 
-def set_connection(connection_type):
+def set_connection(connection_type, connection_name):
     """
     Imports the parser and interpreter corresponding to connection_type.
     """
+    config.CONNECTION_NAME = connection_name
     if connection_type == "vbox":
         config.CONNECTION_TYPE = "vbox"
         config.Parser = import_attribute("parsers.vbox", "VboxParser")
