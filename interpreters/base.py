@@ -59,10 +59,13 @@ class WordBuffer():
 
 class BaseInterpreter():
     def __init__(self):
+        self.aliases = {}
+        self.grammars = {}
+        self.compiled_grammars = {}
         # Holds all grammar rules that the interpreter will use.
         self.mode_grammar = {}
         self.mode_grammar_compiled = {}
-        self.aliases = {}
+        self.mode = config.DEFAULT_MODE
 
     def load_aliases(self):
         """
@@ -96,7 +99,15 @@ class BaseInterpreter():
 
         return grammars
 
-    def set_mode(self, mode, grammars, compiled_grammars):
+    def load_all(self):
+        """
+        Loads all of the grammars and aliases.
+        """
+        self.aliases = self.load_aliases()
+        self.grammars = self.load_grammars(parse=False)
+        self.compiled_grammars = self.load_grammars(parse=True)
+
+    def set_mode(self, mode):
         """
         Populates self.mode_grammar with each grammar specified by the mode.
         """
@@ -106,10 +117,17 @@ class BaseInterpreter():
             mode_grammars = modes.modes[mode]
             for grammar in mode_grammars:
                 # Add the rules from the grammar to self.mode_grammar.
-                self.mode_grammar.update(grammars[grammar])
-                self.mode_grammar_compiled.update(compiled_grammars[grammar])
+                self.mode_grammar.update(self.grammars[grammar])
+                self.mode_grammar_compiled.update(self.compiled_grammars[grammar])
         else:
             print("Unrecognized mode: " + mode)
+
+    def reinitialize(self):
+        """
+        Reloads all of the grammars to repopulate the mode_grammar.
+        """
+        self.load_all()
+        self.set_mode(self.mode)
 
     def read_input(self):
         """
@@ -167,9 +185,7 @@ class BaseInterpreter():
 
     def interpret(self):
         utilities.log("Loading grammars...")
-        self.aliases = self.load_aliases()
-        grammars = self.load_grammars(parse=False)
-        compiled_grammars = self.load_grammars(parse=True)
-        self.set_mode(config.DEFAULT_MODE, grammars, compiled_grammars)
+        self.load_all()
+        self.set_mode(config.DEFAULT_MODE)
         utilities.log("Loading complete.")
         self.read_input()
