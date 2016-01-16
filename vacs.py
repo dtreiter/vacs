@@ -24,12 +24,11 @@ def main():
                                  action="store_true")
     arguments = argument_parser.parse_args()
 
-    utilities.set_connection(arguments.connection_type, arguments.connection_name)
-
     if arguments.verbose:
         utilities.set_verbose(True)
-    interpreter = config.Interpreter()
-    interpreter.interpret()
+
+    utilities.set_connection(arguments.connection_type, arguments.connection_name)
+    config.Interpreter.interpret()
 
 
 if __name__ == "__main__":

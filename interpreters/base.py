@@ -81,11 +81,24 @@ class BaseInterpreter():
 
         return compiled_aliases
 
+    def clear_grammar_cache(self):
+        """
+        Since grammars are just Python modules, Python will cache them in
+        `sys.modules` once they've been imported. This function will clear the
+        cache so changes in grammars can be reloaded.
+        """
+        grammars = utilities.get_grammar_names()
+        for grammar in grammars:
+            module = ".".join(["grammars", grammar])
+            del sys.modules[module]
+
     def load_grammars(self, parse):
         """
         Loads each compiled grammar from the subdirectories of the grammars
         directory.
         """
+        # TODO don't call load grammars twice. Just modify self.grammars and
+        # self.grammars_compiled directly
         grammars = {}
         grammar_names = utilities.get_grammar_names()
         for grammar_name in grammar_names:
@@ -113,6 +126,7 @@ class BaseInterpreter():
         """
         if mode in modes.modes:
             self.mode_grammar.clear()
+            self.mode_grammar_compiled.clear()
             # The list of grammars which make up this mode.
             mode_grammars = modes.modes[mode]
             for grammar in mode_grammars:
@@ -120,12 +134,13 @@ class BaseInterpreter():
                 self.mode_grammar.update(self.grammars[grammar])
                 self.mode_grammar_compiled.update(self.compiled_grammars[grammar])
         else:
-            print("Unrecognized mode: " + mode)
+            utilities.log("Unrecognized mode: " + mode)
 
     def reinitialize(self):
         """
         Reloads all of the grammars to repopulate the mode_grammar.
         """
+        self.clear_grammar_cache()
         self.load_all()
         self.set_mode(self.mode)
 

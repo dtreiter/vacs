@@ -12,11 +12,14 @@ def set_connection(connection_type, connection_name):
     if connection_type == "vbox":
         config.CONNECTION_TYPE = "vbox"
         config.Parser = import_attribute("parsers.vbox", "VboxParser")
-        config.Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
+        Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
     elif connection_type == "tmux":
         config.CONNECTION_TYPE = "tmux"
         config.Parser = import_attribute("parsers.tmux", "TmuxParser")
-        config.Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
+        Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
+
+    # Instantiate the interpreter.
+    config.Interpreter = Interpreter()
 
 def set_verbose(is_verbose):
     config.VERBOSE = is_verbose
