@@ -1,5 +1,7 @@
+import grammar_utilities
+
 grammar = {
-    "alias": "alias",
+    "alias": "t]a, <quote><quote><left>",
     "aliases": "aliases",
     "compiler": "compiler",
     "config": "config",
@@ -13,6 +15,7 @@ grammar = {
     "lexer": "lexer",
     "mode": "mode",
     "parser": "parser",
+    "reinitialize": grammar_utilities.reload_grammars,
     "symbol": "symbol",
     "token": "token",
     "utilities": "utilities",

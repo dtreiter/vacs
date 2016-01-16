@@ -67,7 +67,7 @@ grammar = {
     "dot": ".",
     "case": ".",
     "quote": "<quote>",
-    "\\\"": "<quote>",
+    "\"": "<quote>",
     "smack": "<quote>",
     "smudge": "'",
     "/": "/",

@@ -4,7 +4,9 @@ def snippet(key):
 
 grammar = {
     "and": " and ",
+    "cheese": "pip ",
     "comment": "# ",
+    "false": "False",
     "from": "from ",
     "hippie": "<alt>/",
     "import": "import ",
@@ -18,6 +20,7 @@ grammar = {
     "range": "range()<left>",
     "return": "return ",
     "self": "self",
+    "true": "True",
 
     "also": snippet("vcei"),
     "condition": snippet("vcif"),

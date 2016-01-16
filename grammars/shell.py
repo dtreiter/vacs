@@ -8,5 +8,6 @@ grammar = {
     "get": "git ",
     "install": "install ",
     "option": "--",
+    "pseudo": "sudo ",
     "message": "-m ''<left>"
 }

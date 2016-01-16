@@ -3,5 +3,5 @@
 modes = {
     "python": ["general", "stump", "keyboard", "spacemacs", "shell", "vacs", "python"],
     "elisp": ["general", "stump", "keyboard", "spacemacs", "shell", "vacs", "python", "elisp"],
-    "javascript": ["general", "stump", "keyboard", "spacemacs", "shell", "vacs", "python", "javascript"]
+    "javascript": ["general", "abbreviations", "stump", "keyboard", "spacemacs", "shell", "vacs", "python", "javascript"]
 }
