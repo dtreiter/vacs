@@ -1,5 +1,5 @@
 VERBOSE = False
-DEFAULT_MODE = "javascript"
+DEFAULT_MODE = "python"
 
 # TODO Separate these from the config
 CONNECTION_TYPE = None

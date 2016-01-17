@@ -1,5 +1,13 @@
 import grammar_utilities
 
+def python_mode(text):
+    grammar_utilities.set_mode("python")
+    return " "
+
+def javascript_mode(text):
+    grammar_utilities.set_mode("javascript")
+    return " "
+
 grammar = {
     "alias": "t]a, <quote><quote><left>",
     "aliases": "aliases",
@@ -12,9 +20,11 @@ grammar = {
     "general": "general",
     "grammar": "grammar",
     "interpreter": "interpreter",
+    "javascript": javascript_mode,
     "lexer": "lexer",
     "mode": "mode",
     "parser": "parser",
+    "python": python_mode,
     "reinitialize": grammar_utilities.reload_grammars,
     "symbol": "symbol",
     "token": "token",
