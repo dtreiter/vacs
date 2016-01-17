@@ -3,6 +3,7 @@ import sys
 import tty
 import importlib
 import re
+import traceback
 
 import config
 import lexer # TODO Reorganize to remove dependency.
@@ -182,6 +183,7 @@ class BaseInterpreter():
                         utilities.log("parsed: " + keys, verbose=True)
                     except:
                         utilities.log("ERROR: Unexpected error in grammar function")
+                        utilities.log(traceback.format_exc())
                         utilities.log(str(sys.exc_info()[0]))
                     break
                 else:
