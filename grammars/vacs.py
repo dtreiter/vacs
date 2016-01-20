@@ -1,9 +1,9 @@
 import grammar_utilities
 
-def python_mode(text):
+def python_mode():
     grammar_utilities.set_mode("python")
 
-def javascript_mode(text):
+def javascript_mode():
     grammar_utilities.set_mode("javascript")
 
 grammar = {

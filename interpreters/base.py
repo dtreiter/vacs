@@ -4,6 +4,7 @@ import tty
 import importlib
 import re
 import traceback
+import inspect
 
 import config
 import lexer # TODO Reorganize to remove dependency.
@@ -171,12 +172,17 @@ class BaseInterpreter():
             if word in self.mode_grammar_compiled:
                 if callable(self.mode_grammar_compiled[word]):
                     try:
-                        # Run the rest of the text through the function.
-                        rest = words.get_all()
-                        if rest == "":
-                            utilities.log("ERROR: No text provided for grammar function.")
-                            break
-                        result = self.mode_grammar_compiled[word](rest)
+                        arg_count = len(inspect.getargspec(self.mode_grammar_compiled[word]).args)
+                        if arg_count == 1:
+                            # Run the rest of the text through the function.
+                            rest = words.get_all()
+                            if rest == "":
+                                utilities.log("ERROR: No text provided for grammar function.")
+                                break
+                            result = self.mode_grammar_compiled[word](rest)
+                        else:
+                            result = self.mode_grammar_compiled[word]()
+
                         if isinstance(result, str) and result != "":
                             keys = config.Parser.parse_string(result)
                             self.send_keystrokes(keys)
@@ -188,7 +194,7 @@ class BaseInterpreter():
                         utilities.log("ERROR: Unexpected error in grammar function")
                         utilities.log(traceback.format_exc())
                         utilities.log(str(sys.exc_info()[0]))
-                    break
+                        break
                 else:
                     keys = self.mode_grammar_compiled[word]
                     self.send_keystrokes(keys)

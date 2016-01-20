@@ -5,9 +5,7 @@ import utilities
 def log(text):
     utilities.log(text)
 
-# TODO This function does not need to take any arguments.
-# Revisit when this is been accounted for in the interpreter.
-def reload_grammars(text):
+def reload_grammars():
     log("Reloading grammars and aliases.")
     config.Interpreter.reinitialize()
     log("Reloading complete.")
