@@ -221,6 +221,7 @@ grammar = {
     "tag": "<lbracket><rbracket><left>",
     "string": "<quote><quote><left>",
     "compare": " == ",
+    "not": " != ",
     "equals": " = ",
     "plus": " + ",
     "multiply": " * ",
