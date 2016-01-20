@@ -177,10 +177,13 @@ class BaseInterpreter():
                             utilities.log("ERROR: No text provided for grammar function.")
                             break
                         result = self.mode_grammar_compiled[word](rest)
-                        keys = config.Parser.parse_string(result)
-                        self.send_keystrokes(keys)
-                        utilities.log(word + " (FUNCTION) -> " + result)
-                        utilities.log("parsed: " + keys, verbose=True)
+                        if isinstance(result, str) and result != "":
+                            keys = config.Parser.parse_string(result)
+                            self.send_keystrokes(keys)
+                            utilities.log(word + "(<phrase>) -> " + result)
+                            utilities.log("parsed: " + keys, verbose=True)
+                        else:
+                            utilities.log(word + "(<phrase>)")
                     except:
                         utilities.log("ERROR: Unexpected error in grammar function")
                         utilities.log(traceback.format_exc())

@@ -2,11 +2,9 @@ import grammar_utilities
 
 def python_mode(text):
     grammar_utilities.set_mode("python")
-    return " "
 
 def javascript_mode(text):
     grammar_utilities.set_mode("javascript")
-    return " "
 
 grammar = {
     "alias": "t]a, <quote><quote><left>",
