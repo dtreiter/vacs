@@ -90,12 +90,26 @@ SCANCODES = {
     "cpslk": 58,
     "f1": 59,
     "f2": 60,
+    "f3": 61,
+    "f4": 62,
+    "f5": 63,
+    "f6": 64,
+    "f7": 65,
+    "f8": 66,
+    "f9": 67,
+    "f10": 68,
+    "home": 71,
     "up": 72,
-    "pgup": 73,
+    "pageup": 73,
     "left": 75,
     "right": 77,
+    "end": 79,
     "down": 80,
-    "pgdn": 81
+    "pagedown": 81,
+    "insert": 82,
+    "delete": 83,
+    "f11": 87,
+    "f12": 88,
 }
 
 class VboxParser(BaseParser):

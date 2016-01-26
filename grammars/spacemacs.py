@@ -50,7 +50,7 @@ grammar = {
     "reselect": "gv",
     "retry": "<ctrl>_",
     "remove": "dd",
-    "scratch": "<ctrl>x<backspace>",
+    "clear": "<ctrl>x<backspace>",
     "select": "v",
     "shell": "shell",
     "snippet": "snippet",
