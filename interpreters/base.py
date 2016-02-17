@@ -184,7 +184,7 @@ class BaseInterpreter():
                             result = self.mode_grammar_compiled[word]()
 
                         if isinstance(result, str) and result != "":
-                            keys = config.Parser.parse_string(result)
+                            keys = config.Parser.parse_tokens(lexer.lex_string(result))
                             self.send_keystrokes(keys)
                             utilities.log(word + "(<phrase>) -> " + result)
                             utilities.log("parsed: " + keys, verbose=True)

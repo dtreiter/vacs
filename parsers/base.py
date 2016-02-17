@@ -51,18 +51,3 @@ class BaseParser():
         string representing the parsed token.
         """
         raise NotImplementedError()
-
-    @classmethod
-    def parse_string(cls, string):
-        """
-        Creates a token for each letter in string and then parses them.
-        """
-        tokens = []
-        for letter in list(string):
-            tokens.append({
-                "type": "symbol",
-                "modifiers": [],
-                "symbol": letter
-            })
-
-        return cls.parse_tokens(tokens)

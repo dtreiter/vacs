@@ -146,3 +146,7 @@ def is_special(string):
             return True
 
     return False
+
+def lex_string(string):
+    characters = split_characters(string)
+    return tokenize(characters)
