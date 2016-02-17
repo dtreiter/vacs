@@ -46,7 +46,34 @@ SPECIAL_CHARACTERS = {
 
 MODIFIERS = {
     "ctrl": "C-",
+    "shift": "S-",
     "alt": "M-"
+}
+
+# Mapping of symbols which require the shift key to the non-shift key they are
+# physically located on.
+SHIFT_SYMBOLS = {
+    "-": "_",
+    "=": "+",
+    "[": "{",
+    "]": "}",
+    ";": ":",
+    "'": "quote",
+    "`": "~",
+    "backslash": "|",
+    ",": "lbracket",
+    ".": "rbracket",
+    "/": "?",
+    "1": "!",
+    "2": "@",
+    "3": "#",
+    "4": "$",
+    "5": "%",
+    "6": "^",
+    "7": "&",
+    "8": "*",
+    "9": "(",
+    "0": ")",
 }
 
 class TmuxParser(BaseParser):
@@ -56,6 +83,21 @@ class TmuxParser(BaseParser):
         Given a symbol and a list of modifiers, return a string representing
         the parsed token.
         """
+
+        # If we can apply the shift modifier ourselves, then do so. For example,
+        # uppercase letters and symbols like `$`.
+        #
+        # Otherwise, if the symbol is a special character it will pick up tmux's
+        # shift modifier when parse_modifiers gets called. For example,
+        # <shift><tab> -> S-Tab
+        if "shift" in token["modifiers"]:
+            if token["symbol"] in SHIFT_SYMBOLS:
+                token["symbol"] = SHIFT_SYMBOLS[token["symbol"]]
+                token["modifiers"].remove("shift")
+            elif len(token["symbol"]) == 1:
+                token["symbol"] = token["symbol"].upper()
+                token["modifiers"].remove("shift")
+
         if token["symbol"] in SPECIAL_CHARACTERS:
             token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 

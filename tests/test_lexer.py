@@ -64,5 +64,24 @@ class TestLexer(unittest.TestCase):
         }]
         self.assertEqual(result, expected)
 
+    def test_shift(self):
+        result = lexer.lex({"test": "A<shift><tab>"})
+        expected = [{
+            "key": "test",
+            "tokens": [
+                {
+                    "type": "symbol",
+                    "modifiers": ["shift"],
+                    "symbol": "a"
+                },
+                {
+                    "type": "symbol",
+                    "modifiers": ["shift"],
+                    "symbol": "tab"
+                }
+            ]
+        }]
+        self.assertEqual(result, expected)
+
 if __name__ == "__main__":
     unittest.main()

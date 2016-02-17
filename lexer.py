@@ -32,7 +32,33 @@ SPECIALS = [
     "lbracket",
     "rbracket"
 ]
-MODIFIERS = ["ctrl", "alt"]
+MODIFIERS = ["ctrl", "alt", "shift"]
+
+# Mapping of symbols which require the shift key to the non-shift key they are
+# physically located on.
+SHIFT_SYMBOLS = {
+    "_": "-",
+    "+": "=",
+    "{": "[",
+    "}": "]",
+    ":": ";",
+    "quote": "'",
+    "~": "`",
+    "|": "backslash",
+    "lbracket": ",",
+    "rbracket": ".",
+    "?": "/",
+    "!": "1",
+    "@": "2",
+    "#": "3",
+    "$": "4",
+    "%": "5",
+    "^": "6",
+    "&": "7",
+    "*": "8",
+    "(": "9",
+    ")": "0"
+}
 
 def lex(grammar):
     """
@@ -110,10 +136,25 @@ def tokenize(characters):
             print("ERROR: Unrecognized tag '" + character + "' in grammar.")
             return
 
+        normalize_shift(token)
         tokens.append(token)
 
     return tokens
 
+def normalize_shift(token):
+    """
+    Converts a symbol which requires the shift key to a plain symbol with
+    the shift modifier.
+
+    For example:
+    : -> <shift>;
+    """
+    if token["symbol"] in SHIFT_SYMBOLS:
+        token["modifiers"].append("shift")
+        token["symbol"] = SHIFT_SYMBOLS[token["symbol"]]
+    elif token["symbol"].istitle():
+        token["modifiers"].append("shift")
+        token["symbol"] = token["symbol"].lower()
 
 def is_tag(character):
     """Determine if the character is a tag."""

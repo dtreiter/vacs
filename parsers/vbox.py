@@ -1,31 +1,5 @@
 from base import BaseParser
 
-# Mapping of symbols which require the shift key to the non-shift key they are
-# physically located on.
-SHIFT_SYMBOLS = {
-    "_": "-",
-    "+": "=",
-    "{": "[",
-    "}": "]",
-    ":": ";",
-    "quote": "'",
-    "~": "`",
-    "|": "backslash",
-    "lbracket": ",",
-    "rbracket": ".",
-    "?": "/",
-    "!": "1",
-    "@": "2",
-    "#": "3",
-    "$": "4",
-    "%": "5",
-    "^": "6",
-    "&": "7",
-    "*": "8",
-    "(": "9",
-    ")": "0"
-}
-
 # Mapping of keys to their corresponding decimal scan code. Note that only the
 # key down scan codes are stored - the key up scan code is formed by adding 128
 # to the original scan code.
@@ -116,29 +90,10 @@ class VboxParser(BaseParser):
     @classmethod
     def parse_symbol(cls, token):
         """
-        Convert a symbol which requires the shift key to instead have the shift
-        key modifier. Then return all key up and key down scan codes for the
-        token.
+        Return all key up and key down scan codes for the token.
         """
-        cls.normalize_shift(token)
         scancodes = cls.get_scancodes(token)
         return scancodes
-
-    @classmethod
-    def normalize_shift(cls, token):
-        """
-        Converts a symbol which requires the shift key to a plain symbol with
-        the shift modifier.
-
-        For example:
-        : -> <shift>;
-        """
-        if token["symbol"] in SHIFT_SYMBOLS:
-            token["modifiers"].append("shift")
-            token["symbol"] = SHIFT_SYMBOLS[token["symbol"]]
-        elif token["symbol"].istitle():
-            token["modifiers"].append("shift")
-            token["symbol"] = token["symbol"].lower()
 
     @classmethod
     def get_modifier_keydowns(cls, token):
