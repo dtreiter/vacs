@@ -11,7 +11,7 @@ def escape(keys):
         return "<esc>" + keys
 
 def leader(keys):
-    return "<alt>M" + keys
+    return "<alt>m" + keys
 
 
 def jump(text):
@@ -39,10 +39,12 @@ grammar = {
     "jerk": escape("A"),
     "jump": jump,
     "merge": "J",
+    "next": "<ctrl>e",
     "okay": escape(""),
     "previous": "''",
     "inside": "vi",
     "trim": escape("$x"),
+    "record": "qq",
     "reload": ":e!",
     "reformat": "<alt>q",
     "repeat": "@q",
@@ -55,18 +57,28 @@ grammar = {
     "shell": "shell",
     "snippet": "snippet",
     "surround": "s",
+    "test": "<ctrl>ao<up><enter>",
     "top": "zt",
     "undo": "<ctrl>_",
     "until": "t",
     "uppercase": "U",
     "visual": "V",
     "word": "w",
+    # "example": "<shift><tab>",
 
+    "first": "<down><enter>",
+    "second": "<down><down><enter>",
+    "third": "<down><down><down><enter>",
+    "fourth": "<down><down><down><down><enter>",
+
+    "completion": leader("ta"),
     "column": leader("wv"),
-    "committing": leader("gh"),
+    "commit": leader("gcc"),
+    "committing": leader("gds"),
     "compile": leader("cC") + "<enter>",
     "configuration": leader("fed"),
-    "difference": leader("gd"),
+    "describe": leader("hdk"),
+    "difference": leader("gdu"),
     "flip": leader("ww"),
     "frame": leader("wo"),
     "helm": leader(":"),
@@ -75,13 +87,13 @@ grammar = {
     "open": leader("ff"),
     "other": leader("<tab>"),
     "persist": leader("fs"),
-    "project": leader("/") + "<ctrl>x<backspace>",
+    "project": leader("/"),
     "register": leader("yr"),
     "reconfigure": leader("yi"),
     "save": leader("fs"),
     "search": leader("ss"),
     "store": "viw" + leader("yr"),
-    "next": leader("yn"),
+    "relative": leader("tr"),
     "rotate": leader("wR"),
     "status": leader("gs"),
     "switch": leader("bb"),

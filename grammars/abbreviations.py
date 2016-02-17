@@ -6,6 +6,6 @@ grammar = {
     "library": "lib",
     "directory": "dir",
     "directories": "dirs",
-    "reminder": "TODO",
+    "reminder": "TODO ",
     "specification": "spec",
 }
