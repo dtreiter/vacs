@@ -4,17 +4,17 @@ import importlib
 
 import config
 
-def set_connection(connection_type, connection_name):
+def set_target(target_type, target_name):
     """
-    Imports the parser and interpreter corresponding to connection_type.
+    Imports the parser and interpreter corresponding to target_type.
     """
-    config.CONNECTION_NAME = connection_name
-    if connection_type == "vbox":
-        config.CONNECTION_TYPE = "vbox"
+    config.TARGET_NAME = target_name
+    if target_type == "vbox":
+        config.TARGET_TYPE = "vbox"
         config.Parser = import_attribute("parsers.vbox", "VboxParser")
         Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
-    elif connection_type == "tmux":
-        config.CONNECTION_TYPE = "tmux"
+    elif target_type == "tmux":
+        config.TARGET_TYPE = "tmux"
         config.Parser = import_attribute("parsers.tmux", "TmuxParser")
         Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
 

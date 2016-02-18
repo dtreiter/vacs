@@ -6,7 +6,7 @@ class BaseParser():
 
     Subclasses will need to implement:
         parse_token - Class method that returns a string in the form the
-                      interpreter expects to send the connection.
+                      interpreter expects to send to the target.
     """
 
     @classmethod

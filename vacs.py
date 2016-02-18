@@ -10,13 +10,13 @@ def main():
     If no arguments are provided, start the interpreter.
     """
     argument_parser = argparse.ArgumentParser(description="Voice Accessibility Control System")
-    argument_parser.add_argument("connection_type",
+    argument_parser.add_argument("target_type",
                                  help="Where vacs should send key strokes to",
                                  default="vbox",
                                  choices=["vbox", "tmux"],
                                  action="store")
-    argument_parser.add_argument("connection_name",
-                                 help="The session or VM name",
+    argument_parser.add_argument("target_name",
+                                 help="The tmux session or VM name",
                                  default="vacs",
                                  action="store")
     argument_parser.add_argument("--verbose",
@@ -27,7 +27,7 @@ def main():
     if arguments.verbose:
         utilities.set_verbose(True)
 
-    utilities.set_connection(arguments.connection_type, arguments.connection_name)
+    utilities.set_target(arguments.target_type, arguments.target_name)
     config.Interpreter.interpret()
 
 

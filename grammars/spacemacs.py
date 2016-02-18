@@ -2,7 +2,7 @@ import config
 import utilities
 
 def escape(keys):
-    if config.CONNECTION_TYPE == "tmux":
+    if config.TARGET_TYPE == "tmux":
         # When using tmux, keypresses can occur so quickly that Emacs
         # experiences problems. So instead we rely on mapping f10 to
         # evil-force-normal-state.
