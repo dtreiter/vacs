@@ -1,13 +1,11 @@
 import argparse
 
 import config
-import compiler
 import utilities
 
 def main():
     """
-    Parse any command line arguments and do the corresponding task.
-    If no arguments are provided, start the interpreter.
+    Parse any command line arguments and start the interpreter.
     """
     argument_parser = argparse.ArgumentParser(description="Voice Accessibility Control System")
     argument_parser.add_argument("target_type",

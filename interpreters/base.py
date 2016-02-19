@@ -94,7 +94,7 @@ class BaseInterpreter():
             module = ".".join(["grammars", grammar])
             del sys.modules[module]
 
-    def load_grammars(self, parse):
+    def load_grammars(self, compile):
         """
         Loads each compiled grammar from the subdirectories of the grammars
         directory.
@@ -106,10 +106,10 @@ class BaseInterpreter():
         for grammar_name in grammar_names:
             module = ".".join(["grammars", grammar_name])
             grammar = importlib.import_module(module)
-            if parse:
+            if compile:
                 utilities.log("Parsing grammar: '" + grammar_name + "'", verbose=True)
-                grammars[grammar_name] = config.Parser.parse(lexer.lex(grammar.grammar))
-            elif not parse:
+                grammars[grammar_name] = config.Compiler.compile(lexer.lex(grammar.grammar))
+            elif not compile:
                 grammars[grammar_name] = grammar.grammar
 
         return grammars
@@ -119,8 +119,8 @@ class BaseInterpreter():
         Loads all of the grammars and aliases.
         """
         self.aliases = self.load_aliases()
-        self.grammars = self.load_grammars(parse=False)
-        self.compiled_grammars = self.load_grammars(parse=True)
+        self.grammars = self.load_grammars(compile=False)
+        self.compiled_grammars = self.load_grammars(compile=True)
 
     def set_mode(self, mode):
         """
@@ -184,10 +184,10 @@ class BaseInterpreter():
                             result = self.mode_grammar_compiled[word]()
 
                         if isinstance(result, str) and result != "":
-                            keys = config.Parser.parse_tokens(lexer.lex_string(result))
+                            keys = config.Compiler.compile_key_events(lexer.lex_string(result))
                             self.send_keystrokes(keys)
                             utilities.log(word + "(<phrase>) -> " + result)
-                            utilities.log("parsed: " + keys, verbose=True)
+                            utilities.log("compiled: " + keys, verbose=True)
                         else:
                             utilities.log(word + "(<phrase>)")
                     except:

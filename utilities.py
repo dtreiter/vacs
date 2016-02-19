@@ -6,16 +6,16 @@ import config
 
 def set_target(target_type, target_name):
     """
-    Imports the parser and interpreter corresponding to target_type.
+    Imports the compiler and interpreter corresponding to the target.
     """
     config.TARGET_NAME = target_name
     if target_type == "vbox":
         config.TARGET_TYPE = "vbox"
-        config.Parser = import_attribute("parsers.vbox", "VboxParser")
+        config.Compiler = import_attribute("compilers.vbox", "VboxCompiler")
         Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
     elif target_type == "tmux":
         config.TARGET_TYPE = "tmux"
-        config.Parser = import_attribute("parsers.tmux", "TmuxParser")
+        config.Compiler = import_attribute("compilers.tmux", "TmuxCompiler")
         Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
 
     # Instantiate the interpreter.

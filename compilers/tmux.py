@@ -1,4 +1,4 @@
-from base import BaseParser
+from base import BaseCompiler
 
 SPECIAL_CHARACTERS = {
     "esc": "Escape",
@@ -76,19 +76,19 @@ SHIFT_SYMBOLS = {
     "0": ")",
 }
 
-class TmuxParser(BaseParser):
+class TmuxCompiler(BaseCompiler):
     @classmethod
-    def parse_symbol(cls, token):
+    def compile_key_event(cls, token):
         """
-        Given a symbol and a list of modifiers, return a string representing
-        the parsed token.
+        Given a key and a list of modifiers, return a string representing the
+        compiled key event.
         """
 
         # If we can apply the shift modifier ourselves, then do so. For example,
         # uppercase letters and symbols like `$`.
         #
         # Otherwise, if the symbol is a special character it will pick up tmux's
-        # shift modifier when parse_modifiers gets called. For example,
+        # shift modifier when compile_modifiers gets called. For example,
         # <shift><tab> -> S-Tab
         if "shift" in token["modifiers"]:
             if token["symbol"] in SHIFT_SYMBOLS:
@@ -101,18 +101,18 @@ class TmuxParser(BaseParser):
         if token["symbol"] in SPECIAL_CHARACTERS:
             token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
 
-        parsed_modifiers = cls.parse_modifiers(token["modifiers"])
-        return parsed_modifiers + token["symbol"]
+        compiled_modifiers = cls.compile_modifiers(token["modifiers"])
+        return compiled_modifiers + token["symbol"]
 
     @classmethod
-    def parse_modifiers(cls, modifiers):
+    def compile_modifiers(cls, modifiers):
         """
-        Given a list of modifiers parse them into the form the interpreter needs.
-        Returns the parsed modifiers as a string.
+        Given a list of modifiers compile them into the form the interpreter needs.
+        Returns the compiled modifiers as a string.
         """
-        parsed_modifiers = ""
+        compiled_modifiers = ""
         for modifier in modifiers:
             if modifier in MODIFIERS:
-                parsed_modifiers += MODIFIERS[modifier]
+                compiled_modifiers += MODIFIERS[modifier]
 
-        return parsed_modifiers
+        return compiled_modifiers

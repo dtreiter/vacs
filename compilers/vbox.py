@@ -1,4 +1,4 @@
-from base import BaseParser
+from base import BaseCompiler
 
 # Mapping of keys to their corresponding decimal scan code. Note that only the
 # key down scan codes are stored - the key up scan code is formed by adding 128
@@ -86,9 +86,9 @@ SCANCODES = {
     "f12": 88,
 }
 
-class VboxParser(BaseParser):
+class VboxCompiler(BaseCompiler):
     @classmethod
-    def parse_symbol(cls, token):
+    def compile_key_event(cls, token):
         """
         Return all key up and key down scan codes for the token.
         """

@@ -77,8 +77,8 @@ def lex(grammar):
             characters = split_characters(grammar[entry])
             tokens = tokenize(characters)
         tokenized_entry = {
-            "key": entry,
-            "tokens": tokens
+            "identifier": entry,
+            "value": tokens
         }
         tokenized_grammar.append(tokenized_entry)
 
