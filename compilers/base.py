@@ -5,8 +5,8 @@ class BaseCompiler():
     all methods are class methods.
 
     Subclasses will need to implement:
-        compile_token - Class method that returns a string in the form the
-                      interpreter expects to send to the target.
+        compile_key_event - Class method that returns a string in the form the
+                            interpreter expects to send to the target.
     """
 
     @classmethod

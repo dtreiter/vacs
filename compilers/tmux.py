@@ -78,7 +78,7 @@ SHIFT_SYMBOLS = {
 
 class TmuxCompiler(BaseCompiler):
     @classmethod
-    def compile_key_event(cls, token):
+    def compile_key_event(cls, key_event):
         """
         Given a key and a list of modifiers, return a string representing the
         compiled key event.
@@ -90,19 +90,19 @@ class TmuxCompiler(BaseCompiler):
         # Otherwise, if the symbol is a special character it will pick up tmux's
         # shift modifier when compile_modifiers gets called. For example,
         # <shift><tab> -> S-Tab
-        if "shift" in token["modifiers"]:
-            if token["symbol"] in SHIFT_SYMBOLS:
-                token["symbol"] = SHIFT_SYMBOLS[token["symbol"]]
-                token["modifiers"].remove("shift")
-            elif len(token["symbol"]) == 1:
-                token["symbol"] = token["symbol"].upper()
-                token["modifiers"].remove("shift")
+        if "shift" in key_event["modifiers"]:
+            if key_event["symbol"] in SHIFT_SYMBOLS:
+                key_event["symbol"] = SHIFT_SYMBOLS[key_event["symbol"]]
+                key_event["modifiers"].remove("shift")
+            elif len(key_event["symbol"]) == 1:
+                key_event["symbol"] = key_event["symbol"].upper()
+                key_event["modifiers"].remove("shift")
 
-        if token["symbol"] in SPECIAL_CHARACTERS:
-            token["symbol"] = SPECIAL_CHARACTERS[token["symbol"]]
+        if key_event["symbol"] in SPECIAL_CHARACTERS:
+            key_event["symbol"] = SPECIAL_CHARACTERS[key_event["symbol"]]
 
-        compiled_modifiers = cls.compile_modifiers(token["modifiers"])
-        return compiled_modifiers + token["symbol"]
+        compiled_modifiers = cls.compile_modifiers(key_event["modifiers"])
+        return compiled_modifiers + key_event["symbol"]
 
     @classmethod
     def compile_modifiers(cls, modifiers):

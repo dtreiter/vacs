@@ -88,54 +88,54 @@ SCANCODES = {
 
 class VboxCompiler(BaseCompiler):
     @classmethod
-    def compile_key_event(cls, token):
+    def compile_key_event(cls, key_event):
         """
-        Return all key up and key down scan codes for the token.
+        Return all key up and key down scan codes for the key event.
         """
-        scancodes = cls.get_scancodes(token)
+        scancodes = cls.get_scancodes(key_event)
         return scancodes
 
     @classmethod
-    def get_modifier_keydowns(cls, token):
+    def get_modifier_keydowns(cls, key_event):
         """
-        Given a token, return a list containing the keyboard scan codes
-        corresponding to the key down events for each modifier present in the
-        token.
+        Given a key event, return a list containing the keyboard scan codes
+        corresponding to each key down for each modifier present in the key
+        event.
         """
         keydowns = []
-        for modifier in token["modifiers"]:
+        for modifier in key_event["modifiers"]:
             keydowns.append(cls.keydown(SCANCODES[modifier]))
 
         return keydowns
 
     @classmethod
-    def get_modifier_keyups(cls, token):
+    def get_modifier_keyups(cls, key_event):
         """
-        Given a token, return a list containing the keyboard scan codes
-        corresponding to the key up events for each modifier present in the
-        token.
+        Given a key event, return a list containing the keyboard scan codes
+        corresponding to each key up for each modifier present in the key
+        event.
         """
         keyups = []
-        for modifier in token["modifiers"]:
+        for modifier in key_event["modifiers"]:
             keyups.append(cls.keyup(SCANCODES[modifier]))
 
         return keyups
 
     @classmethod
-    def get_scancodes(cls, token):
+    def get_scancodes(cls, key_event):
         """
-        Given a token, return a space separated string containing the keyboard
-        scan codes corresponding to the token.
+        Given a key event, return a space separated string containing the keyboard
+        scan codes corresponding to the key event.
         """
-        if token["symbol"] in SCANCODES:
-            code = SCANCODES[token["symbol"]]
+        if key_event["symbol"] in SCANCODES:
+            code = SCANCODES[key_event["symbol"]]
             scancodes = []
-            scancodes.extend(cls.get_modifier_keydowns(token))
+            scancodes.extend(cls.get_modifier_keydowns(key_event))
             scancodes.extend([cls.keydown(code), cls.keyup(code)])
-            scancodes.extend(cls.get_modifier_keyups(token))
+            scancodes.extend(cls.get_modifier_keyups(key_event))
             return " ".join(scancodes)
         else:
-            print("ERROR: Symbol '" + token["symbol"] + "' not in scan codes list.")
+            print("ERROR: Symbol '" + key_event["symbol"] + "' not in scan codes list.")
             return "" # TODO Should maybe throw exception?
 
     @classmethod
