@@ -96,6 +96,23 @@ class VboxCompiler(BaseCompiler):
         return scancodes
 
     @classmethod
+    def get_scancodes(cls, key_event):
+        """
+        Given a key event, return a space separated string containing the keyboard
+        scan codes corresponding to the key event.
+        """
+        if key_event["key"] in SCANCODES:
+            code = SCANCODES[key_event["key"]]
+            scancodes = []
+            scancodes.extend(cls.get_modifier_keydowns(key_event))
+            scancodes.extend([cls.keydown(code), cls.keyup(code)])
+            scancodes.extend(cls.get_modifier_keyups(key_event))
+            return " ".join(scancodes)
+        else:
+            print("ERROR: Key '" + key_event["key"] + "' not in scan codes list.")
+            return "" # TODO Should maybe throw exception?
+
+    @classmethod
     def get_modifier_keydowns(cls, key_event):
         """
         Given a key event, return a list containing the keyboard scan codes
@@ -120,23 +137,6 @@ class VboxCompiler(BaseCompiler):
             keyups.append(cls.keyup(SCANCODES[modifier]))
 
         return keyups
-
-    @classmethod
-    def get_scancodes(cls, key_event):
-        """
-        Given a key event, return a space separated string containing the keyboard
-        scan codes corresponding to the key event.
-        """
-        if key_event["key"] in SCANCODES:
-            code = SCANCODES[key_event["key"]]
-            scancodes = []
-            scancodes.extend(cls.get_modifier_keydowns(key_event))
-            scancodes.extend([cls.keydown(code), cls.keyup(code)])
-            scancodes.extend(cls.get_modifier_keyups(key_event))
-            return " ".join(scancodes)
-        else:
-            print("ERROR: Key '" + key_event["key"] + "' not in scan codes list.")
-            return "" # TODO Should maybe throw exception?
 
     @classmethod
     def keydown(cls, code):
