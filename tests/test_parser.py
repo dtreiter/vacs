@@ -1,83 +1,78 @@
 import unittest
-import lexer
+import parser
 
-class TestLexer(unittest.TestCase):
+class TestParser(unittest.TestCase):
     def test_letters(self):
-        result = lexer.lex({"test": "abc"})
+        result = parser.parse({"test": "abc"})
         expected = [{
-            "key": "test",
-            "tokens": [
+            "identifier": "test",
+            "type": "key_events",
+            "value": [
                 {
-                    "type": "symbol",
                     "modifiers": [],
-                    "symbol": "a"
+                    "key": "a"
                 },
                 {
-                    "type": "symbol",
                     "modifiers": [],
-                    "symbol": "b"
+                    "key": "b"
                 },
                 {
-                    "type": "symbol",
                     "modifiers": [],
-                    "symbol": "c"
+                    "key": "c"
                 }
             ]
         }]
         self.assertEqual(result, expected)
 
     def test_modifiers(self):
-        result = lexer.lex({"test": "<ctrl>a<alt>b"})
+        result = parser.parse({"test": "<ctrl>a<alt>b"})
         expected = [{
-            "key": "test",
-            "tokens": [
+            "identifier": "test",
+            "type": "key_events",
+            "value": [
                 {
-                    "type": "symbol",
                     "modifiers": ["ctrl"],
-                    "symbol": "a"
+                    "key": "a"
                 },
                 {
-                    "type": "symbol",
                     "modifiers": ["alt"],
-                    "symbol": "b"
+                    "key": "b"
                 }
             ]
         }]
         self.assertEqual(result, expected)
 
     def test_specials(self):
-        result = lexer.lex({"test": "<esc><ctrl><tab>"})
+        result = parser.parse({"test": "<esc><ctrl><tab>"})
         expected = [{
-            "key": "test",
-            "tokens": [
+            "identifier": "test",
+            "type": "key_events",
+            "value": [
                 {
-                    "type": "symbol",
                     "modifiers": [],
-                    "symbol": "esc"
+                    "key": "esc"
                 },
                 {
-                    "type": "symbol",
                     "modifiers": ["ctrl"],
-                    "symbol": "tab"
+                    "key": "tab"
                 }
             ]
         }]
         self.assertEqual(result, expected)
 
     def test_shift(self):
-        result = lexer.lex({"test": "A<shift><tab>"})
+        result = parser.parse({"test": "A<shift><tab>"})
         expected = [{
-            "key": "test",
-            "tokens": [
+            "identifier": "test",
+            "type": "key_events",
+            "value": [
                 {
-                    "type": "symbol",
                     "modifiers": ["shift"],
-                    "symbol": "a"
+                    "key": "a"
                 },
                 {
-                    "type": "symbol",
                     "modifiers": ["shift"],
-                    "symbol": "tab"
+                    "key": "tab"
                 }
             ]
         }]

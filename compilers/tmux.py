@@ -87,22 +87,22 @@ class TmuxCompiler(BaseCompiler):
         # If we can apply the shift modifier ourselves, then do so. For example,
         # uppercase letters and symbols like `$`.
         #
-        # Otherwise, if the symbol is a special character it will pick up tmux's
+        # Otherwise, if the key is a special character it will pick up tmux's
         # shift modifier when compile_modifiers gets called. For example,
         # <shift><tab> -> S-Tab
         if "shift" in key_event["modifiers"]:
-            if key_event["symbol"] in SHIFT_SYMBOLS:
-                key_event["symbol"] = SHIFT_SYMBOLS[key_event["symbol"]]
+            if key_event["key"] in SHIFT_SYMBOLS:
+                key_event["key"] = SHIFT_SYMBOLS[key_event["key"]]
                 key_event["modifiers"].remove("shift")
-            elif len(key_event["symbol"]) == 1:
-                key_event["symbol"] = key_event["symbol"].upper()
+            elif len(key_event["key"]) == 1:
+                key_event["key"] = key_event["key"].upper()
                 key_event["modifiers"].remove("shift")
 
-        if key_event["symbol"] in SPECIAL_CHARACTERS:
-            key_event["symbol"] = SPECIAL_CHARACTERS[key_event["symbol"]]
+        if key_event["key"] in SPECIAL_CHARACTERS:
+            key_event["key"] = SPECIAL_CHARACTERS[key_event["key"]]
 
         compiled_modifiers = cls.compile_modifiers(key_event["modifiers"])
-        return compiled_modifiers + key_event["symbol"]
+        return compiled_modifiers + key_event["key"]
 
     @classmethod
     def compile_modifiers(cls, modifiers):

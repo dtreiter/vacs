@@ -7,7 +7,7 @@ import traceback
 import inspect
 
 import config
-import lexer # TODO Reorganize to remove dependency.
+import parser # TODO Reorganize to remove dependency.
 import modes
 import utilities
 
@@ -108,7 +108,7 @@ class BaseInterpreter():
             grammar = importlib.import_module(module)
             if compile:
                 utilities.log("Parsing grammar: '" + grammar_name + "'", verbose=True)
-                grammars[grammar_name] = config.Compiler.compile(lexer.lex(grammar.grammar))
+                grammars[grammar_name] = config.Compiler.compile(parser.parse(grammar.grammar))
             elif not compile:
                 grammars[grammar_name] = grammar.grammar
 
@@ -184,7 +184,7 @@ class BaseInterpreter():
                             result = self.mode_grammar_compiled[word]()
 
                         if isinstance(result, str) and result != "":
-                            keys = config.Compiler.compile_key_events(lexer.lex_string(result))
+                            keys = config.Compiler.compile_key_events(parser.parse_string(result))
                             self.send_keystrokes(keys)
                             utilities.log(word + "(<phrase>) -> " + result)
                             utilities.log("compiled: " + keys, verbose=True)
