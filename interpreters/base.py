@@ -33,8 +33,7 @@ class BaseInterpreter():
         Loads all of the grammars and aliases.
         """
         self.aliases = self.load_aliases()
-        self.grammars = self.load_grammars(compile=False)
-        self.compiled_grammars = self.load_grammars(compile=True)
+        self.load_grammars()
 
     def load_aliases(self):
         """
@@ -50,25 +49,18 @@ class BaseInterpreter():
 
         return compiled_aliases
 
-    def load_grammars(self, compile):
+    def load_grammars(self):
         """
         Loads each compiled grammar from the subdirectories of the grammars
         directory.
         """
-        # TODO don't call load grammars twice. Just modify self.grammars and
-        # self.grammars_compiled directly
-        grammars = {}
         grammar_names = utilities.get_grammar_names()
         for grammar_name in grammar_names:
             module = ".".join(["grammars", grammar_name])
             grammar = importlib.import_module(module)
-            if compile:
-                utilities.log("Parsing grammar: '" + grammar_name + "'", verbose=True)
-                grammars[grammar_name] = config.Compiler.compile(parser.parse(grammar.grammar))
-            elif not compile:
-                grammars[grammar_name] = grammar.grammar
-
-        return grammars
+            self.grammars[grammar_name] = grammar.grammar
+            utilities.log("Compiling grammar: '" + grammar_name + "'", verbose=True)
+            self.compiled_grammars[grammar_name] = config.Compiler.compile(parser.parse(grammar.grammar))
 
     def set_mode(self, mode):
         """
