@@ -189,10 +189,10 @@ class WordBuffer():
         if len(self.words) == 0:
             raise StopIteration()
         word = self.words.pop(0)
-        if re.match("[,.:;\-_/\"]$", word):
+        if re.match("[\d,.:;\-_/\"\(\)]$", word):
             return word
         else:
-            split_words = re.split("([,.:;\-_/\"])", word)
+            split_words = re.split("([\d,.:;\-_/\"\(\)])", word)
             # Remove any empty string words. This can happen when the word which
             # gets split consists of only punctuation.
             split_words = [word for word in split_words if word]
