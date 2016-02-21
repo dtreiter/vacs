@@ -2,34 +2,34 @@ import os
 import glob
 import importlib
 
-import config
+import globals
 
 def set_target(target_type, target_name):
     """
     Imports the compiler and interpreter corresponding to the target.
     """
-    config.TARGET_NAME = target_name
+    globals.TARGET_NAME = target_name
     if target_type == "vbox":
-        config.TARGET_TYPE = "vbox"
-        config.Compiler = import_attribute("compilers.vbox", "VboxCompiler")
+        globals.TARGET_TYPE = "vbox"
+        globals.Compiler = import_attribute("compilers.vbox", "VboxCompiler")
         Interpreter = import_attribute("interpreters.vbox", "VboxInterpreter")
     elif target_type == "tmux":
-        config.TARGET_TYPE = "tmux"
-        config.Compiler = import_attribute("compilers.tmux", "TmuxCompiler")
+        globals.TARGET_TYPE = "tmux"
+        globals.Compiler = import_attribute("compilers.tmux", "TmuxCompiler")
         Interpreter = import_attribute("interpreters.tmux", "TmuxInterpreter")
 
     # Instantiate the interpreter.
-    config.Interpreter = Interpreter()
+    globals.Interpreter = Interpreter()
 
 def set_verbose(is_verbose):
-    config.VERBOSE = is_verbose
+    globals.VERBOSE = is_verbose
 
 def log(string, verbose=False):
     """
     Prints the string followed by a '\r', which is necessary when the terminal is
     in the raw mode.
     """
-    if (not verbose) or (verbose and config.VERBOSE):
+    if (not verbose) or (verbose and globals.VERBOSE):
         print(string + "\r")
 
 def import_attribute(module, attribute):

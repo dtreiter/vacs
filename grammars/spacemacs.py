@@ -1,8 +1,7 @@
-import config
-import utilities
+import grammar_utilities
 
 def escape(keys):
-    if config.TARGET_TYPE == "tmux":
+    if grammar_utilities.get_target() == "tmux":
         # When using tmux, keypresses can occur so quickly that Emacs
         # experiences problems. So instead we rely on mapping f10 to
         # evil-force-normal-state.

@@ -1,6 +1,6 @@
 import argparse
 
-import config
+import globals
 import utilities
 
 def main():
@@ -26,7 +26,7 @@ def main():
         utilities.set_verbose(True)
 
     utilities.set_target(arguments.target_type, arguments.target_name)
-    config.Interpreter.interpret()
+    globals.Interpreter.interpret()
 
 
 if __name__ == "__main__":

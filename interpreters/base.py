@@ -7,6 +7,7 @@ import traceback
 import inspect
 
 import config
+import globals
 import parser # TODO Reorganize to remove dependency.
 import modes
 import utilities
@@ -60,7 +61,7 @@ class BaseInterpreter():
             grammar = importlib.import_module(module)
             self.grammars[grammar_name] = grammar.grammar
             utilities.log("Compiling grammar: '" + grammar_name + "'", verbose=True)
-            self.compiled_grammars[grammar_name] = config.Compiler.compile(parser.parse(grammar.grammar))
+            self.compiled_grammars[grammar_name] = globals.Compiler.compile(parser.parse(grammar.grammar))
 
     def set_mode(self, mode):
         """
@@ -116,7 +117,7 @@ class BaseInterpreter():
                             result = self.mode_grammar_compiled[word]()
 
                         if isinstance(result, str) and result != "":
-                            keys = config.Compiler.compile_key_events(parser.parse_string(result))
+                            keys = globals.Compiler.compile_key_events(parser.parse_string(result))
                             self.send_keystrokes(keys)
                             utilities.log(word + "(<phrase>) -> " + result)
                             utilities.log("compiled: " + keys, verbose=True)
