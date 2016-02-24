@@ -16,6 +16,7 @@ grammar = {
     "filter": "filter",
     "functions": "functions",
     "general": "general",
+    "globals": "globals",
     "grammar": "grammar",
     "interpreter": "interpreter",
     "javascript": javascript_mode,

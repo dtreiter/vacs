@@ -20,6 +20,8 @@ def jump(text):
         utilities.log("ERROR: Non-digit argument provided to jump function")
         return ""
 
+def correct(text):
+    return escape("0/" + text + "<enter>")
 
 grammar = {
     "above": escape("O"),
@@ -32,11 +34,15 @@ grammar = {
     "buffer": "<ctrl>xh",
     "center": "zz",
     "copy": "yy",
+    "correct": correct,
     "done": escape(leader("fs")),
     "evaluate": "<alt>:",
+    "exit": "q",
+    "highlight": leader("sc"),
     "jam": escape("I"),
     "jerk": escape("A"),
     "jump": jump,
+    "leader": "<alt>m",
     "merge": "J",
     "next": "<ctrl>e",
     "okay": escape(""),
@@ -44,7 +50,6 @@ grammar = {
     "inside": "vi",
     "trim": escape("$x"),
     "record": "qq",
-    "reload": ":e!",
     "reformat": "<alt>q",
     "repeat": "@q",
     "replace": ":s/",
@@ -54,6 +59,7 @@ grammar = {
     "clear": "<ctrl>x<backspace>",
     "select": "v",
     "shell": "shell",
+    "snipe": escape("0s"),
     "snippet": "snippet",
     "surround": "s",
     "test": "<ctrl>ao<up><enter>",
@@ -63,7 +69,7 @@ grammar = {
     "uppercase": "U",
     "visual": "V",
     "word": "w",
-    # "example": "<shift><tab>",
+    "example": "<shift><tab>",
 
     "first": "<down><enter>",
     "second": "<down><down><enter>",
@@ -89,6 +95,7 @@ grammar = {
     "project": leader("/"),
     "register": leader("yr"),
     "reconfigure": leader("yi"),
+    "reload": leader("fn"),
     "save": leader("fs"),
     "search": leader("ss"),
     "store": "viw" + leader("yr"),

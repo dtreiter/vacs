@@ -74,7 +74,6 @@ grammar = {
     "peanut": "<backslash>",
 
     # Control characters
-    "multiplex": "<ctrl>a",
     "quit": "<ctrl>g",
     "complete": "<ctrl>n",
     "insert": "<ctrl>r",
