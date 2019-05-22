@@ -1,7 +1,8 @@
 # This file contains a mapping of modes to grammars.
+base = ["general", "abbreviations", "stump", "keyboard", "spacemacs", "shell", "git", "vacs", "tmux"]
 
 modes = {
-    "python": ["general", "abbreviations", "stump", "keyboard", "spacemacs", "shell", "vacs", "python"],
-    "elisp": ["general", "stump", "keyboard", "spacemacs", "shell", "vacs", "python", "elisp"],
-    "javascript": ["general", "abbreviations", "stump", "keyboard", "spacemacs", "shell", "vacs", "javascript"]
+    "python": base + ["python"],
+    "elisp": base + ["elisp"],
+    "javascript": base + ["javascript"],
 }

@@ -1,6 +1,7 @@
 grammar = {
     "argument": "arg",
     "arguments": "args",
+    "controller": "ctrl",
     "vnc": "vnc",
     "user": "usr",
     "library": "lib",

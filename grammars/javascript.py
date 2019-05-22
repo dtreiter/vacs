@@ -5,6 +5,7 @@ grammar = {
     "another": "<esc>A;<enter>",
     "canvas": "canvas",
     "console": "<ctrl>J",
+    "constant": "const ",
     "finish": "<esc>A;<esc>",
     "javascript": ".js",
     "js": "js",

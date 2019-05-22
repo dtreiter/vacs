@@ -12,7 +12,6 @@ def escape(keys):
 def leader(keys):
     return "<alt>m" + keys
 
-
 def jump(text):
     if text.isdigit():
         return text + "gg"
@@ -36,6 +35,7 @@ grammar = {
     "copy": "yy",
     "correct": correct,
     "done": escape(leader("fs")),
+    "drawer": leader("ft"),
     "evaluate": "<alt>:",
     "exit": "q",
     "highlight": leader("sc"),
@@ -76,23 +76,25 @@ grammar = {
     "third": "<down><down><down><enter>",
     "fourth": "<down><down><down><down><enter>",
 
+    "archive": leader("gsll"),
     "completion": leader("ta"),
     "column": leader("wv"),
-    "commit": leader("gcc"),
-    "committing": leader("gds"),
+    "commit": leader("gscc"),
+    "committing": leader("gsds"),
     "compile": leader("cC") + "<enter>",
     "configuration": leader("fed"),
     "describe": leader("hdk"),
-    "difference": leader("gdu"),
+    "difference": leader("gsdu"),
     "flip": leader("ww"),
     "frame": leader("wo"),
     "helm": leader(":"),
     "home": leader(":"),
+    "line": "<ctrl>q", # For selecting Helm lines
     "maximize": leader("wm"),
     "open": leader("ff"),
     "other": leader("<tab>"),
     "persist": leader("fs"),
-    "project": leader("/"),
+    "project": leader("pf"),
     "register": leader("yr"),
     "reconfigure": leader("yi"),
     "reload": leader("fn"),
